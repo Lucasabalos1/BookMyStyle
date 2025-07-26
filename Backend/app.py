@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -29,6 +29,23 @@ class Empleado(db.Model):
 #     db.session.add(admin_user)
 #     db.session.commit()
 #     print("base de datos y usuario creados correctamente")
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    data = request.get_json()
+    user_email = data.get('email')
+    user_password = data.get('password')
+    user = Empleado.query.filter_by(email = user_email).first()
+    
+    if not user:
+        return jsonify({"success": False, "message": "Credenciales invalidas"}), 401
+        
+    if user and not check_password_hash(user.password_hashed, user_password):
+        return jsonify({"success": False, "message": "La contraseña es incorrecta"}), 401
+    elif user and check_password_hash(user.password_hashed, user_password):
+        return jsonify({"success":True, "usuario": f"{user.name} {user.last_name}", "rol": user.type}),200
+    
+
 
 @app.route("/")
 def index():
