@@ -1,17 +1,26 @@
+import { useState } from 'react'
 import styles from './Header.module.css'
-
+import { Logout } from './Logout'
 export const Header = () => {
+
+  const [showLogoutMenu, setShowLogoutMenu] = useState(false)
+
+  const toggleMenu = () => {
+    setShowLogoutMenu(!showLogoutMenu)
+  }
+
   return (
     <>
       <header>
         <nav>
             <div className={styles.rowHeaderContent}>
               <div className={styles.hamburgerContainer}>
-                <i class="fa-solid fa-bars"></i>
+                <i className="fa-solid fa-bars"></i>
               </div>
 
               <div className={styles.userContainer}>
-                <i class="fa-solid fa-circle-user"></i>
+                <i className="fa-solid fa-circle-user" onClick={toggleMenu}></i>
+                <Logout show={showLogoutMenu} />
               </div>
             </div>
         </nav>

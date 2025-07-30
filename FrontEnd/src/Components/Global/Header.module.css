@@ -1,6 +1,5 @@
 nav{
     height: 80px;
-    border: 1px solid #fff;
     display: flex;
     align-items: center;
 }
@@ -29,6 +28,7 @@ nav{
     background-color: #fff;
     color: #121212;
     border-radius: 50px;
+    cursor:pointer;
 }
 
 

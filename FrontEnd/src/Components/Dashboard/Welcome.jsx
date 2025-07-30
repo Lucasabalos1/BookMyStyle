@@ -2,16 +2,14 @@ import styles from './Welcome.module.css'
 
 export const Welcome = () => {
   
-  // Falta agregar la logica que me trae el usuario
+  const user = JSON.parse(localStorage.getItem("User_data"))
 
   return (
     <>
       <section className={styles.welcomeSection}>
         <div className={styles.welcomeContainer}>
-            <div className={styles.welcomeMessage}>
-                <h1>BOOKMYSTYLE</h1>
-                <h2>Bienvenido *inserte nombre de usuario*</h2>
-            </div>
+            <h1>BOOKMYSTYLE</h1>
+            <h2>Bienvenido {user.usuario}</h2>
         </div>
       </section>
     </>

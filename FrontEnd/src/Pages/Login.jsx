@@ -11,8 +11,7 @@ export const Login = () => {
   
   const onSubmit = async (event) => {
     event.preventDefault()
-    
-  
+
 
     try {
       const response = await fetch(
@@ -31,6 +30,9 @@ export const Login = () => {
 
       const data = await response.json();
       if(data.success){
+
+        localStorage.setItem("User_data", JSON.stringify(data))
+
         navigate('/dashboard')
       }
       
