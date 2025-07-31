@@ -10,6 +10,7 @@
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     margin-top: 20px;
+    text-shadow: rgb(73, 0, 126) -1px 1px 0px, rgb(47, 0, 217) 1px -1px 0px;
 }
 
 .welcomeContainer h2{
@@ -17,4 +18,14 @@
     padding: 20px;
     font-size: 1.2rem;
     font-family: 'Poppins', sans-serif;
+}
+
+@media (min-width: 900px) {
+    .welcomeContainer h1{
+        font-size: 4rem;
+    }
+
+    .welcomeContainer h2{
+        font-size: 1.7rem;
+    }
 }

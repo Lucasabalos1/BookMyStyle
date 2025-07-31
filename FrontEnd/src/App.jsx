@@ -9,7 +9,7 @@ export const App = () => {
     <>
       <Routes>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/dashboard' element={<PrivateRoute role="user_admin" ><Dashboard/></PrivateRoute>}/>
+        <Route path='/dashboard' element={<PrivateRoute role={['user_admin', 'user_empleado']}  ><Dashboard/></PrivateRoute>}/>
         <Route path='/' element={<Navigate to="/login" />}/>
       </Routes>
     </>

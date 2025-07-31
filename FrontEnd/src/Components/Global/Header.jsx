@@ -18,8 +18,8 @@ export const Header = () => {
                 <i className="fa-solid fa-bars"></i>
               </div>
 
-              <div className={styles.userContainer}>
-                <i className="fa-solid fa-circle-user" onClick={toggleMenu}></i>
+              <div className={styles.userContainer} onClick={toggleMenu}>
+                <i className="fa-solid fa-user"></i>
                 <Logout show={showLogoutMenu} />
               </div>
             </div>

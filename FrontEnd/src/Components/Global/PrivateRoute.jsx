@@ -8,7 +8,7 @@ export const PrivateRoute = ({children, role}) => {
     return <Navigate to="/login" />;
   }
 
-  if(user_data.rol !== role){
+  if (!role.includes(user_data.rol)) {
     return <Navigate to="/login" />;
   }
   

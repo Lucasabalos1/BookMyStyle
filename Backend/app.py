@@ -26,7 +26,9 @@ class Empleado(db.Model):
 #     db.create_all()
 
 #     admin_user = Empleado(email = "lucasabalos531@gmail.com", password_hashed = generate_password_hash("admin123", method="pbkdf2:sha256"), name = "Lucas", last_name = "Abalos", type = "user_admin")
+#     empleado_user = Empleado(email = "joseperez@gmail.com", password_hashed = generate_password_hash("empleado123", method="pbkdf2:sha256"), name = "Jose", last_name = "Perez", type = "user_empleado")
 #     db.session.add(admin_user)
+#     db.session.add(empleado_user)
 #     db.session.commit()
 #     print("base de datos y usuario creados correctamente")
 

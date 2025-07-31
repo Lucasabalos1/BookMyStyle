@@ -13,15 +13,22 @@
     cursor: pointer;
     
     opacity: 0;
+    visibility: hidden;
     transform: translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .logoutMenuContainer.show {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
 }
 
 .logoutMenuContainer h3{
     padding-left: 5px
+}
+
+.logoutMenuContainer:hover{
+    background-color: #a353ef;
+
 }

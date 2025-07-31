@@ -1,5 +1,9 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import styles from './Login.module.css'
+import logo from '../assets/BookmystyleLogoInverso.png';
+import Swal from "sweetalert2";
+
 export const Login = () => {
   const [emailValue, setEmail] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
@@ -11,7 +15,6 @@ export const Login = () => {
   
   const onSubmit = async (event) => {
     event.preventDefault()
-
 
     try {
       const response = await fetch(
@@ -29,31 +32,52 @@ export const Login = () => {
       );
 
       const data = await response.json();
-      if(data.success){
-
-        localStorage.setItem("User_data", JSON.stringify(data))
-
-        navigate('/dashboard')
+      if(!data.success){
+        Swal.fire({
+          icon: 'error',
+          title: 'Las credenciales son invalidas',
+          text: 'Verifique el correo o la contraseña',
+          confirmButtonColor: '#FF4ED2'
+        })
+        return
       }
+
+      localStorage.setItem("User_data", JSON.stringify(data))
+
+      navigate('/dashboard')
+      
       
     } catch (error) {
-      console.error("Error al entrenar el modelo:", error);
+      console.error("Error al conectar con el servidor:", error);
     }
   }
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+
+      <section className={styles.loginSectionContainer}>
+        <form onSubmit={onSubmit}>
         
-        <label htmlFor="correo">Correo Electronico</label>
-        <input type="email" id="correo" name="correo" placeholder="Ingrese su correo" value={emailValue} onChange={onInputChange}/>
+        <div className={styles.loginContainer}>
 
-        <label htmlFor="password">Contraseña</label>
-        <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" value={passwordValue} onChange={onInputChange}/>
+          <div className={styles.logoContainer}>
+            <img src={logo} alt="logo-booymystyle" />
+          </div>
 
-        <button>Login</button>
+          <h2>LOGIN</h2>
+          
+          <label className={styles.labelLogin} htmlFor="correo">Correo Electrónico</label>
+          <input className={styles.inputLogin} type="email" id="correo" name="correo" placeholder="Ingrese su correo" value={emailValue} onChange={onInputChange}/>
 
-      </form>
+          <label className={styles.labelLogin} htmlFor="password">Contraseña</label>
+          <input className={styles.inputLogin} type="password" id="password" name="password" placeholder="Ingrese su contraseña" value={passwordValue} onChange={onInputChange}/>
+
+          <button className={styles.submitButton}>LOGIN</button>
+        
+        </div>
+
+        </form>
+      </section>
     </>
   )
 }
