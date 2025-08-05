@@ -1,0 +1,56 @@
+import styles from './Navbar.module.css'
+import logo from '../../assets/BookmystyleLogoInverso.png';
+import { NavLink } from 'react-router-dom';
+
+export const Navbar = ({show, toggleNavbar}) => {
+  return (
+    <>
+
+        <div className={`${styles.modalBackground} ${show ? styles.showBackground : ""}`}>
+            <div className={`${styles.navbarContainer} ${show ? styles.showNavbar : ""}`}>
+                <div className={styles.closeModalContainer} onClick={toggleNavbar}>
+                    <i className="fa-solid fa-backward"></i>
+                </div>
+                
+                <div className={styles.logoContainer}>
+                    <img src={logo} alt="logo-web" />
+                </div>
+
+                <div className={styles.pagesContainer}>
+                    
+                    <div className={styles.sectionContainer}>
+                        <h2 className={styles.sectionTitle}>Clientes</h2>
+                        <div className={styles.sectionNavListContainer}>
+                            <div className={styles.sectionNavContainer}>
+                                <NavLink to='/clientManager' className={styles.navLink}>
+                                    <i className="fa-solid fa-user-group"></i>
+                                    <h3>Ver clientes</h3>
+                                </NavLink>
+                            </div>
+                            <div className={styles.sectionNavContainer}>
+                                <NavLink to='/createClient' className={styles.navLink}>
+                                    <i className="fa-solid fa-plus"></i>
+                                    <h3>Añadir clientes</h3>
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.sectionContainer}>
+                        <h2 className={styles.sectionTitle}>Empleados</h2>
+                        <div className={styles.sectionNavListContainer}>
+                            <div className={styles.sectionNavContainer}>
+                                <NavLink to='/employeeManager' className={styles.navLink}>
+                                    <i className="fa-solid fa-user-tie"></i>
+                                    <h3>Gestionar empleados</h3>
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </>
+  )
+}
