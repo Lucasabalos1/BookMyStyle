@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { Header } from "../Components/Global/Header"
+import { ClientCard } from "../Components/GestionClientes/ClientCard"
+import styles from "./ClientManager.module.css"
 
 export const ClientManager = () => {
   
   const [clients, setClients] = useState([])
-
+  
   const getClients = async () => {
     try {
       const response = await fetch("http://127.0.0.1:5000/getClients")
@@ -25,19 +27,16 @@ export const ClientManager = () => {
     <>
     <Header/>
 
-    <div className="clientsContainer">
-      {clients.map(client => (
-       <div className="cardContainer">
-         <h2>{`${client.nombre} ${client.apellido}`}</h2>
-         <h3>{client.telefono}</h3>
-         <span>{client.genero}</span>
-         <div className="buttonsContainer">
-          <button>Editar</button>
-          <button>Eliminar</button>
-         </div>
-       </div>
-      ))}
+    <div className={styles.mainContainer}>
+      <h2>Listado de clientes</h2>
+
+      <section className={styles.clientsCardContainer}>
+        {clients.map((client) => (
+          <ClientCard key={client.id} client={client} getClients={getClients}/>
+        ))}
+      </section>
     </div>
+
     </>
   )
 }

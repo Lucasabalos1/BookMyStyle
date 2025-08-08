@@ -1,0 +1,104 @@
+.modalBackground{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s all linear;
+    display: flex;
+    align-items: center;
+}
+
+.showModal{
+    opacity: 1;
+    visibility: visible;
+}
+
+.formCreateContainer{
+    width: 80%;
+    margin: 0 auto;
+    background-color: #0D0D2B;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 4px 0px #fff;
+}
+
+.closeBtnContainer{
+    display: flex;
+    justify-content: end;
+    padding: 10px 10px 0 0;
+}
+
+.closeBtn{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.formCreateContainer h2{
+    text-align: center;
+    padding: 20px 10px;
+}
+
+label, input{
+    width: 80%;
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+label{
+    margin-bottom: 2px;
+}
+
+input{
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+input:focus{
+    border: 1px solid #E91E63;
+    outline: none;
+}
+
+select {
+    display: block;
+    width: 80%;
+    margin: 0 auto 5px auto;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.addEmployeeButton{
+    display: block;
+    margin: 15px auto;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #E91E63;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.addEmployeeButton:hover{
+    background-color: #e85988;
+
+}
+@media (min-width: 900px) {
+    .formCreateContainer{
+        max-width: 450px;
+    }
+
+    .addEmployeeButton{
+        margin: 20px auto;
+    }
+}

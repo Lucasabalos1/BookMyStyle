@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Header } from "../Components/Global/Header"
+import styles from "./CreateClient.module.css"
 
 export const CreateClient = () => {
 
@@ -50,25 +51,31 @@ export const CreateClient = () => {
     <>
       <Header/>
 
-      <form onSubmit={onSubmitClient}>
-        <label htmlFor="nombre">Nombre</label>
-        <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del cliente" value={nameValue} onChange={onInputChange}/>
+      <div className={styles.mainContainer}>
+        <p className={styles.title}>Carga de clientes</p>
+        <section className={styles.formContainer}>
+          <h2>Complete los datos para el nuevo cliente</h2>
+          <form onSubmit={onSubmitClient}>
+            <label htmlFor="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del cliente" value={nameValue} onChange={onInputChange}/>
 
-        <label htmlFor="apellido">Apellido</label>
-        <input type="text" name="apellido" id="apellido" placeholder="Ingrese el apellido del cliente" value={lastNameValue} onChange={onInputChange}/>
+            <label htmlFor="apellido">Apellido</label>
+            <input type="text" name="apellido" id="apellido" placeholder="Ingrese el apellido del cliente" value={lastNameValue} onChange={onInputChange}/>
 
-        <label htmlFor="telefono">Telefono</label>
-        <input type="number" name="telefono" id="telefono" placeholder="Ingerese el telefono del cliente" value={phoneValue} onChange={onInputChange}/>
+            <label htmlFor="telefono">Telefono</label>
+            <input type="number" name="telefono" id="telefono" placeholder="Ingerese el telefono del cliente" value={phoneValue} onChange={onInputChange}/>
 
-        <label htmlFor="genero">Genero</label>
-        <select name="genero" id="genero" value={genreValue} onChange={onInputChange}>
-            <option value="">Selecciona un genero para el cliente</option>
-            <option value="masculino">Masculino</option>
-            <option value="femenino">Femenino</option>
-        </select>
+            <label htmlFor="genero">Genero</label>
+            <select name="genero" id="genero" value={genreValue} onChange={onInputChange}>
+              <option value="">Selecciona un genero para el cliente</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+            </select>
 
-        <button>Crear cliente</button>
-      </form>
+            <button className={styles.submitButton}>Crear cliente</button>
+          </form>
+        </section>
+      </div>
     </>
   )
 }

@@ -1,0 +1,50 @@
+.employeeCard{
+    background-color: #212137;
+    border: 1px solid #E91E63;
+    box-shadow: 0px 0px 4px 0px #fff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px 5px;
+}
+
+.employeeInfo p{
+    font-size: 0.75rem;
+    padding: 0 4px;
+    font-weight: bold;
+}
+
+.editEmployee{
+    margin-right: 5px;
+    background-color: #2427CD;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.deleteEmployee{
+    background-color: #ED1414;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@media (min-width: 900px) {
+
+    .employeeInfo p{
+        font-size: 1rem;
+    }
+
+    .editEmployee,
+    .deleteEmployee{
+        padding: 5px 30px;
+    }
+}

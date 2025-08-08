@@ -1,0 +1,33 @@
+.mainContainer{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.mainContainer h2{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.clientsCardContainer{
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 4px 0px #fff;
+    border-radius: 10px;
+    padding: 20px 10px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (min-width: 900px) {
+    .clientsCardContainer{
+        display: grid;
+        grid-template-columns: repeat(3, minmax(300px, 1fr));
+        justify-items: center;
+        gap: 15px; /* Espacio entre filas y columnas */
+    }    
+}
+

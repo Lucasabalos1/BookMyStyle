@@ -1,0 +1,109 @@
+import styles from "./CreateEmployeeModal.module.css"
+import { useEffect, useState } from "react"
+
+const userRolMap = {
+    "Administrador": "user_admin",
+    "Empleado": "user_empleado"
+}
+
+export const EditEmployeeModal = ({show, toggleEditModal,employee, getEmployee}) => {
+  
+  const [emailEditValue, setEmailEditValue] = useState("")
+  const [passwordEditValue, setPasswordEditValue] = useState("")
+  const [nameEditValue, setNameEditValue] = useState("")
+  const [lastNameEditValue, setLastNameEditValue] = useState("")
+  const [rolEditValue, setRolEditValue] = useState("")
+    
+  const onInputChange = (event) => {
+  
+    (event.target.name === "correoEdit") ? setEmailEditValue(event.target.value) :
+    (event.target.name === "passwordEdit") ? setPasswordEditValue(event.target.value) :
+    (event.target.name === "nameEdit") ? setNameEditValue(event.target.value) :
+    (event.target.name === "lastNameEdit") ? setLastNameEditValue(event.target.value) :
+    setRolEditValue(event.target.value)
+  }
+  
+  const clearInputs = () => {
+      setEmailEditValue("")
+      setPasswordEditValue("")
+      setNameEditValue("")
+      setLastNameEditValue("")
+      setRolEditValue("")
+  }
+
+  const setActualValues = () => {
+    setEmailEditValue(employee.correo)
+    setNameEditValue(employee.nombre)
+    setLastNameEditValue(employee.apellido)
+  }
+
+  useEffect(() => {
+    setActualValues()
+  },[])
+
+  const onSubmitEmployee = async (event) => {
+    event.preventDefault()
+
+    const response = await fetch(`http://127.0.0.1:5000/editarEmpleado/${employee.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailEditValue,
+          password: passwordEditValue,
+          nombre: nameEditValue,
+          apellido: lastNameEditValue,
+          rol: userRolMap[rolEditValue]
+        })
+    })
+
+    const data = await response.json()
+
+    //Cambiar por libreria de notificaciones
+      if (data.success) {
+        alert("Empleado actualizado con exito")
+        toggleEditModal()
+        clearInputs()
+        getEmployee()
+      }else{
+        alert("Error al editar el Empleado")
+      }
+  }
+
+  return (
+    <>
+      <div className={`${styles.modalBackground} ${show ? styles.showModal : ""}`}>
+        <div className={styles.formCreateContainer}>
+            <form onSubmit={onSubmitEmployee}>
+                <div className={styles.closeBtnContainer}>
+                    <button type="button" className={styles.closeBtn} onClick={toggleEditModal}>X</button>
+                </div>
+                <h2>Complete los datos para editar al empleado</h2>
+      
+                      <label htmlFor="correoEdit">Email</label>
+                <input type="email" name="correoEdit"  placeholder="Ingrese el correo del nuevo empleado" value={emailEditValue} onChange={onInputChange} />
+      
+                <label htmlFor="passwordEdit">Contraseña</label>
+                <input type="password" name="passwordEdit"  placeholder="Ingrese la contraseña del nuevo empleado" value={passwordEditValue} onChange={onInputChange} />
+      
+                <label htmlFor="nameEdit">Nombre</label>
+                <input type="text" name="nameEdit"  placeholder="Ingrese el nombre del nuevo empleado" value={nameEditValue} onChange={onInputChange}/>
+      
+                <label htmlFor="lastNameEdit">Apellido</label>
+                <input type="text" name="lastNameEdit"  placeholder="Ingrese el apellido del nuevo empleado" value={lastNameEditValue} onChange={onInputChange}/>
+                      
+                <label htmlFor="rolEdit">Rol</label>
+                <select name="rolEdit"  value={rolEditValue} onChange={onInputChange}>
+                    <option value="">Selecciona un rol para el empleado</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Empleado">Empleado</option>
+                </select>
+      
+                <button className={styles.addEmployeeButton}>Editar empleado</button>
+            </form>
+        </div>
+    </div>
+    </>
+  )
+}
