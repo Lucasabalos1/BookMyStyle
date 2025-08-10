@@ -3,13 +3,21 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from enum import Enum
+from decimal import Decimal
+import datetime
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'instance', 'peluqueria.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
 db = SQLAlchemy(app)
+
+class EstadoTurno(Enum):
+    PENDIENTE = "pendiente"
+    CONFIRMADO = "confirmado"
+    COMPLETADO = "completado"
+    CANCELADO = "cancelado"
 
 class Empleado(db.Model):
     __tablename__ = 'empleado'
@@ -29,7 +37,32 @@ class Cliente(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     phone_number = db.Column(db.String(20), nullable=True, unique=True)
     genre = db.Column(db.String(20), nullable=True)
+    
+class Servicio(db.Model):
+    __tablename__ = 'servicio'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    time = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Numeric(10, 2), nullable=False)
 
+class Turno(db.Model):
+    __tablename__ = 'turno'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date, nullable=False)
+    hour = db.Column(db.Time, nullable=False)
+    state = db.Column(db.Enum(EstadoTurno), nullable=False)
+    note = db.Column(db.String(200), nullable=True)
+    
+    empleado_id = db.Column(db.Integer, db.ForeignKey('empleado.id'), nullable=False)
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'), nullable=False)
+    servicio_id = db.Column(db.Integer, db.ForeignKey('servicio.id'), nullable=False)
+    
+    empleado = db.relationship('Empleado', backref='turnos')
+    cliente = db.relationship('Cliente', backref='turnos')
+    servicio = db.relationship('Servicio', backref='turnos')
+    
 # Creacion de la base datos y usuarios
 # with app.app_context():
 #     db.create_all()
@@ -38,12 +71,21 @@ class Cliente(db.Model):
 #     empleado_user = Empleado(email = "joseperez@gmail.com", password_hashed = generate_password_hash("empleado123", method="pbkdf2:sha256"), name = "Jose", last_name = "Perez", type = "user_empleado")
 #     cliente = Cliente(name = "Martin", last_name = "Gonzales", phone_number = "1123212354", genre="Masculino")
     
+#     servicio1 = Servicio(name="corte de pelo", time=30, price=Decimal('8000.00'))
+#     servicio2 = Servicio(name="teñirse el pelo", time=90, price=Decimal('16000.00'))
+#     servicio3 = Servicio(name="lavado de pelo", time=15, price=Decimal('3000.00'))
+    
+#     turno = Turno(date=datetime.date(2025,8,30), hour=datetime.time(12,0,0), state=EstadoTurno.CONFIRMADO, note="", empleado_id=1, cliente_id=1, servicio_id=1)
+    
 #     db.session.add(admin_user)
 #     db.session.add(empleado_user)
 #     db.session.add(cliente)
+#     db.session.add_all([servicio1,servicio2,servicio3])
+#     db.session.add(turno)
 #     db.session.commit()
 #     print("base de datos y usuario creados correctamente")
 
+#Endpoint para la autenticacion de usuarios
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     data = request.get_json()
@@ -58,6 +100,9 @@ def login():
         return jsonify({"success": False, "message": "La contraseña es incorrecta"}), 401
     elif user and check_password_hash(user.password_hashed, user_password):
         return jsonify({"success":True, "usuario": f"{user.name} {user.last_name}", "rol": user.type}),200
+
+
+
 
 
 #Endpoints para los empleados
@@ -129,7 +174,6 @@ def editar_empleado(id):
 
     return jsonify({"success": True, "message": "El empleado fue editado correctamente"}),200
 
-
 @app.route("/eliminarEmpleado/<int:id>", methods=['DELETE'])
 def eliminar_empleado(id):    
     empleado = Empleado.query.get(id)
@@ -143,6 +187,10 @@ def eliminar_empleado(id):
     return jsonify({"success": True, "message": "El empleado fue eliminado correctamente"}),200
 
 
+
+
+
+#Endpoints para los clientes
 @app.route("/getClients", methods=['GET'])
 def get_clients():
     clientes = Cliente.query.all()
@@ -204,7 +252,6 @@ def editar_cliente(id):
 
     return jsonify({"success": True, "message": "El cliente fue editado correctamente"}),200
 
-
 @app.route("/eliminarCliente/<int:id>", methods=['DELETE'])
 def eliminar_cliente(id):    
     client = Cliente.query.get(id)
@@ -217,9 +264,71 @@ def eliminar_cliente(id):
     
     return jsonify({"success": True, "message": "El cliente fue eliminado correctamente"}),200
 
+
+
+
+
+#Endpoints para los turnos
+@app.route("/getTurnos", methods=['GET'])
+def getTurnos():
+    getAppointments = Turno.query.all()
+    
+    if not getAppointments:
+        return jsonify({"success": True, "data": "No hay ningun turno registrado en la base de datos"}),200
+    
+    Appointments = []
+    
+    for Appointment in getAppointments:
+        Appointments.append({"id": Appointment.id, 
+                             "fecha": Appointment.date.strftime("%Y-%m-%d"), 
+                             "hora": Appointment.hour.strftime("%H:%M"),
+                             "estado": Appointment.state.value,
+                             "note": Appointment.note,
+                             "empleado": Appointment.empleado_id,
+                             "cliente": Appointment.cliente_id,
+                             "servicio": Appointment.servicio_id
+                             })
+    
+    return jsonify({"success": True, "data": Appointments}),200
+
+@app.route("/addTurno", methods=['POST'])
+def add_turno():
+    data = request.get_json()
+    dateStr = data.get("fecha")
+    hourStr = data.get("hora")
+    state = data.get("estado")
+    note = data.get("nota")
+    empleado_id = data.get("empleado")
+    cliente_id = data.get("cliente")
+    servicio_id = data.get("servicio")
+    
+    if not dateStr or not hourStr or not state or not empleado_id or not cliente_id or not servicio_id:
+        return jsonify({"success": False, "message": "Los campos no quedan quedar vacios"}),400
+    
+    date = datetime.datetime.strptime(dateStr,"%Y-%m-%d").date()
+    hour = datetime.datetime.strptime(hourStr,"%H:%M").time()
+    
+    AppointmentExist = Turno.query.filter_by(date = date, hour = hour, empleado_id = empleado_id).first()
+    
+    if AppointmentExist:
+        return jsonify({"success": False, "message": "El Turno ya se encuentra registrado"}),409
+    
+    appointment_datetime = datetime.datetime.combine(date, hour)
+
+    if appointment_datetime < datetime.datetime.now():
+        return jsonify({"success": False, "message": "La fecha y hora debe de ser mayor o igual a la actual"}),409
+    
+    Appointment = Turno(date=date, hour=hour, state=EstadoTurno(state), note=note, empleado_id=empleado_id, cliente_id=cliente_id, servicio_id=servicio_id)
+    
+    db.session.add(Appointment)
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "El turno fue asignado con exito"}),201
+
 @app.route("/")
 def index():
     return jsonify({"message": "Backend funcionando correctamente"})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
