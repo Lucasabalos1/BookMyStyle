@@ -20,8 +20,8 @@ export const Header = () => {
     <>
       <header>
         <nav>
-            <div className={styles.rowHeaderContent} onClick={toggleNavbar}>
-              <div className={styles.hamburgerContainer}>
+            <div className={styles.rowHeaderContent}>
+              <div className={styles.hamburgerContainer} onClick={toggleNavbar}>
                 <i className="fa-solid fa-bars"></i>
               </div>
 

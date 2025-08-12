@@ -9,7 +9,7 @@ export const PrivateRoute = ({children, role}) => {
   }
 
   if (!role.includes(user_data.rol)) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/404Screen" />;
   }
   
   return children
