@@ -325,6 +325,84 @@ def add_turno():
     
     return jsonify({"success": True, "message": "El turno fue asignado con exito"}),201
 
+@app.route("/editTurno/<int:id>", methods=["PUT"])
+def editTurno(id):
+    data = request.get_json()
+    dateStr = data.get("fecha")
+    hourStr = data.get("hora")
+    state = data.get("estado")
+    note = data.get("nota")
+    empleado_id = data.get("empleado")
+    cliente_id = data.get("cliente")
+    servicio_id = data.get("servicio")
+    
+    if not dateStr or not hourStr or not state or not empleado_id or not cliente_id or not servicio_id:
+        return jsonify({"success": False, "message": "Los campos no pueden quedar vacios"}),400
+    
+    date = datetime.datetime.strptime(dateStr,"%Y-%m-%d").date()
+    hour = datetime.datetime.strptime(hourStr,"%H:%M").time()
+    
+    AppointmentExist = Turno.query.filter(Turno.date == date,Turno.hour == hour,Turno.empleado_id == empleado_id,Turno.id != id).first()    
+    
+    if AppointmentExist:
+        return jsonify({"success": False, "message": "El Turno ya se encuentra registrado"}),409
+    
+    appointment_datetime = datetime.datetime.combine(date, hour)
+
+    if appointment_datetime < datetime.datetime.now():
+        return jsonify({"success": False, "message": "La fecha y hora debe de ser mayor o igual a la actual"}),409
+    
+    appointment = Turno.query.get(id)
+    
+    if not appointment:
+        return jsonify({"success": False, "message": "El turno no existe"}), 404
+    
+    appointment.date = date
+    appointment.hour = hour
+    appointment.state = EstadoTurno(state)
+    appointment.note = note
+    
+    appointment.empleado_id = empleado_id
+    appointment.cliente_id = cliente_id
+    appointment.servicio_id = servicio_id
+    
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "El turno fue editado con exito"}),200
+
+@app.route("/deleteTurno/<int:id>", methods=["DELETE"])
+def deleteTurno(id):
+    appointment = Turno.query.get(id)
+    
+    if not appointment:
+        return jsonify({"success": False, "message": "El turno no existe, por lo tanto no se puede eliminar"}),404
+    
+    if appointment.state == EstadoTurno.COMPLETADO:
+        return jsonify({"success": False, "message": "El turno ya fue completado, por lo tanto no puede ser eliminado"}),400
+        
+
+    db.session.delete(appointment)
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "El turno fue eliminado correctamente"}),200
+
+@app.route("/completarTurno/<int:id>", methods=["PATCH"])
+def completar_turno(id):
+    appointment = Turno.query.get(id)
+    
+    if not appointment:
+        return jsonify({"success": False, "message": "El turno que se desea completar no existe"}),404
+    
+    if appointment.state == EstadoTurno.COMPLETADO:
+        return jsonify({"success": False, "message": "El turno ya se encuentra completado"}),409
+    
+    appointment.state = EstadoTurno.COMPLETADO
+    
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "El turno se marco como completado con exito"}),200
+    
+
 @app.route("/")
 def index():
     return jsonify({"message": "Backend funcionando correctamente"})
