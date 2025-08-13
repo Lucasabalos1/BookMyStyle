@@ -99,7 +99,7 @@ def login():
     if user and not check_password_hash(user.password_hashed, user_password):
         return jsonify({"success": False, "message": "La contraseña es incorrecta"}), 401
     elif user and check_password_hash(user.password_hashed, user_password):
-        return jsonify({"success":True, "usuario": f"{user.name} {user.last_name}", "rol": user.type}),200
+        return jsonify({"success":True, "usuario": f"{user.name} {user.last_name}", "rol": user.type, "id": user.id}),200
 
 
 
@@ -330,13 +330,12 @@ def editTurno(id):
     data = request.get_json()
     dateStr = data.get("fecha")
     hourStr = data.get("hora")
-    state = data.get("estado")
     note = data.get("nota")
     empleado_id = data.get("empleado")
     cliente_id = data.get("cliente")
     servicio_id = data.get("servicio")
     
-    if not dateStr or not hourStr or not state or not empleado_id or not cliente_id or not servicio_id:
+    if not dateStr or not hourStr or not empleado_id or not cliente_id or not servicio_id:
         return jsonify({"success": False, "message": "Los campos no pueden quedar vacios"}),400
     
     date = datetime.datetime.strptime(dateStr,"%Y-%m-%d").date()
@@ -359,7 +358,6 @@ def editTurno(id):
     
     appointment.date = date
     appointment.hour = hour
-    appointment.state = EstadoTurno(state)
     appointment.note = note
     
     appointment.empleado_id = empleado_id
@@ -401,6 +399,40 @@ def completar_turno(id):
     db.session.commit()
     
     return jsonify({"success": True, "message": "El turno se marco como completado con exito"}),200
+
+@app.route("/cancelarTurno/<int:id>", methods=["PATCH"])
+def cancelar_turno(id):
+    appointment = Turno.query.get(id)
+    
+    if not appointment:
+        return jsonify({"success": False, "message": "El turno que se desea cancelar no existe"}), 404
+
+    if appointment.state in [EstadoTurno.COMPLETADO, EstadoTurno.CANCELADO]:
+        return jsonify({"success": False, "message": "El turno ya se encuentra completado o cancelado"}), 409
+
+    appointment.state = EstadoTurno.CANCELADO
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "El turno se marcó como cancelado con éxito"}), 200
+
+
+@app.route("/getServices", methods=["GET"])
+def get_services():
+    getServices = Servicio.query.all()
+    
+    if not getServices:
+        return jsonify({"success": True, "message": "No hay ningun servicio registrado"}),200
+    
+    services = []
+    
+    for service in getServices:
+        services.append({"id": service.id,
+                         "nombre": service.name,
+                         "tiempo": service.time,
+                         "precio": service.price
+                         })
+    
+    return jsonify({"success": True, "data": services}),200
     
 
 @app.route("/")
