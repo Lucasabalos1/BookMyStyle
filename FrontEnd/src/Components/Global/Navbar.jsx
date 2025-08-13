@@ -53,13 +53,13 @@ export const Navbar = ({show, toggleNavbar}) => {
                         <div className={styles.sectionNavListContainer}>
                             <div className={styles.sectionNavContainer}>
                                 <NavLink to='/createAppointment' className={styles.navLink}>
-                                    <i class="fa-solid fa-calendar-check"></i>
+                                    <i className="fa-solid fa-calendar-check"></i>
                                     <h3>Crear turnos</h3>
                                 </NavLink>
                             </div>
                             <div className={styles.sectionNavContainer}>
                                 <NavLink to='/appointmentManager' className={styles.navLink}>
-                                    <i class="fa-solid fa-list"></i>
+                                    <i className="fa-solid fa-list"></i>
                                     <h3>Ver turnos</h3>
                                 </NavLink>
                             </div>
