@@ -1,13 +1,28 @@
 import styles from "./AppointmentCard.module.css"
+import { AppointmentConfirmModal } from './AppointmentConfirmModal'
+import { AppointmentCancelModal } from './AppointmentCancelModal'
+import { useState } from "react"
 
-export const AppointmentCard = ({show}) => {
+export const AppointmentCard = ({show, handleData, toggleModalCard}) => {
+  
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [showCancelModal, setShowCancelModal] = useState(false)
+
+  const toggleConfirmModal = () =>{
+    setShowConfirmModal(!showConfirmModal)
+  }
+
+  const toggleCancelModal = () =>{ 
+    setShowCancelModal(!showCancelModal)
+  }
+
   return (
     <>
         <div className={`${styles.modalBackground} ${show ? styles.showCard : ""}`}>
             <article className={styles.cardContainer}>
                 <div className={styles.headerCont}>
                     <h2 className={styles.cardTitle}>BOOKMYSTYLE - TURNO</h2>
-                    <button className={styles.closeBtn}>X</button>
+                    <button className={styles.closeBtn} onClick={toggleModalCard}>X</button>
                 </div>
                 <section className={styles.appointmentInfoCont}>
                     <span className={styles.infoTitleCont}>
@@ -65,10 +80,12 @@ export const AppointmentCard = ({show}) => {
 
                 <section className={styles.buttonsControlerSection}>
                     <button className={styles.editBtn}>Editar</button>
-                    <button className={styles.cancelBtn}>Cancelar</button>
-                    <button className={styles.completeBtn}>Completar</button>
+                    <button className={styles.cancelBtn} onClick={toggleCancelModal}>Cancelar</button>
+                    <button className={styles.completeBtn} onClick={toggleConfirmModal}>Completar</button>
                 </section>
             </article>
+            <AppointmentConfirmModal show={showConfirmModal} toggleConfirmModal={toggleConfirmModal}/>
+            <AppointmentCancelModal show={showCancelModal} toggleCancelModal={toggleCancelModal} />
         </div>      
     </>
   )
