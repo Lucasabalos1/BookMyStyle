@@ -8,6 +8,7 @@ export const AppointmentManager = () => {
   const [appointments, setAppointments] = useState([])
   const [clientlist, setClientList] = useState([])
   const [serviceList, setServiceList] = useState([])
+  const [employeeList, setEmployeeList] = useState([])
   
   const [events, setEvents] = useState([])
 
@@ -22,6 +23,12 @@ export const AppointmentManager = () => {
 
   const getData = async () => {
     try {
+
+      const responseEmployee = await fetch("http://127.0.0.1:5000/getWorkers")
+      const dataEmployee = await responseEmployee.json()
+
+      setEmployeeList(dataEmployee.data)
+
       const responseClient = await fetch("http://127.0.0.1:5000/getClients")
       const dataClient = await responseClient.json()
 
@@ -42,10 +49,16 @@ export const AppointmentManager = () => {
 
       const client = clientlist.find(c => c.id === Number(appointment.cliente));
       const clientName = client ? `${client.nombre} ${client.apellido}` : "Cliente desconocido";
+      const clientGenre = client ? client.genero : "Genero desconocido"; 
+      const clientPhone = client ? client.telefono : "Telefono desconocido";
+
+      const employee = employeeList.find(e => e.id === Number(appointment.empleado));
+      const employeeName = employee ? employee.nombre : "Empleado desconocido";
 
       const service = serviceList.find(s => s.id === Number(appointment.servicio));
       const serviceName = service ? service.nombre : "Servicio desconocido";
-      const duration = service ? service.tiempo : 30; 
+      const duration = service ? service.tiempo : 30;
+      const servicePrice = service ? service.precio : "Precio desconocido";
 
       const start = `${appointment.fecha}T${appointment.hora}`;
       const startDate = new Date(start);
@@ -61,9 +74,13 @@ export const AppointmentManager = () => {
         extendedProps: {
           estado: appointment.estado,
           note: appointment.note,
-          empleado: appointment.empleado,
-          cliente: appointment.cliente,
-          servicio: appointment.servicio
+          empleado: `${employeeName}`,
+          cliente: `${clientName}`,
+          servicio: `${serviceName}`,
+          precio: `${servicePrice}`,
+          fecha: appointment.fecha,
+          genero: `${clientGenre}`,
+          telefono: `${clientPhone}`
         }
       };
     });
@@ -110,7 +127,7 @@ export const AppointmentManager = () => {
           onEventClick={handleEventClick} 
         />        
       </div>
-      <AppointmentCard show={showCard} handleData={handleData} toggleModalCard={toggleModalCard}/>
+      <AppointmentCard show={showCard} handleData={handleData} toggleModalCard={toggleModalCard }/>
 
     </>
   )

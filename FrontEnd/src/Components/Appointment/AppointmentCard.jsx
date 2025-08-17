@@ -32,24 +32,55 @@ export const AppointmentCard = ({show, handleData, toggleModalCard}) => {
                     <div className={styles.appointmentInfo}>
                         <ul className={styles.ulInfoCont}>
                             <li className={styles.liInfoCont}>
-                                <i className="fa-solid fa-calendar"></i>
-                                <p>Fecha: 14/12/2025</p>
+                                <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-calendar"></i>
+                                    <span>Fecha:</span>
+                                </div>
+                                <span>{handleData.fecha}</span>
                             </li>
                             <li className={styles.liInfoCont}>
-                                <i className="fa-solid fa-clock"></i>
-                                <p>Hora: 12:30 - 13:30</p>
+                                <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-clock"></i>
+                                    <span>Hora:</span>
+                                </div>
+                                <span>{handleData.start && handleData.end ? `${handleData.start.getHours()}:${handleData.start.getMinutes()} - ${handleData.end.getHours()}:${handleData.end.getMinutes()}` : ""}</span>
                             </li>
                             <li className={styles.liInfoCont}>
-                                <i className="fa-solid fa-scissors"></i>
-                                <p>Servicio: Corte de pelo</p>
+                                <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-scissors"></i>
+                                    <span>Servicio:</span>
+                                </div>
+                                <span>{handleData.servicio}</span>
                             </li>
                             <li className={styles.liInfoCont}>
-                                <i className="fa-solid fa-dollar"></i>
-                                <p>Precio: 8000$</p>
+                                <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-dollar"></i>
+                                    <span>Precio:</span>
+                                </div>
+                                <span>{Number(handleData.precio).toFixed(0)}$</span>
                             </li>
                             <li className={styles.liInfoCont}>
-                                <i className="fa-solid fa-person"></i>
-                                <p>Atendido por: Eduardo Vasquez</p>
+                                 <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-person"></i>
+                                    <span>Atendido por:</span>
+                                </div>
+                                <span>{handleData.empleado}</span>
+                            </li>
+
+                            <li className={styles.liInfoCont}>
+                                 <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-chart-simple"></i>
+                                    <span>Estado:</span>
+                                </div>
+                                <span>{handleData.estado}</span>
+                            </li>
+
+                            <li className={styles.liInfoCont}>
+                                 <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-message"></i>
+                                    <span>Nota:</span>
+                                </div>
+                                <span>{handleData.note !== "" ? handleData.note : "Sin nota"}</span>
                             </li>
                         </ul>
                     </div>
@@ -63,25 +94,34 @@ export const AppointmentCard = ({show, handleData, toggleModalCard}) => {
                     <div className={styles.appointmentClientInfo}>
                         <ul className={styles.ulClientInfoCont}>
                             <li className={styles.liClientInfoCont}>
-                                <i className="fa-solid fa-id-card"></i>
-                                <p>Nombre y apellido: Jose Perez</p>
+                                 <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-id-card"></i>
+                                    <span>Nombre y apellido:</span>
+                                </div>
+                                <span>{handleData.cliente}</span>
                             </li>
                             <li className={styles.liClientInfoCont}>
-                                <i className="fa-solid fa-clock"></i>
-                                <p>Sexo: Masculino</p>
+                                <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-mars-and-venus"></i>
+                                    <span>Sexo:</span>
+                                </div>
+                                <p>{handleData.genero}</p>
                             </li>
                             <li className={styles.liClientInfoCont}>
-                                <i className="fa-solid fa-phone"></i>
-                                <p>Telefono: 1212121212</p>
+                                <div className={styles.liLabel}>
+                                    <i className="fa-solid fa-phone"></i>
+                                    <span>Telefono:</span>
+                                </div>
+                                <p>{handleData.telefono}</p>
                             </li>
                         </ul>
                     </div>
                 </section>
 
                 <section className={styles.buttonsControlerSection}>
-                    <button className={styles.editBtn}>Editar</button>
-                    <button className={styles.cancelBtn} onClick={toggleCancelModal}>Cancelar</button>
-                    <button className={styles.completeBtn} onClick={toggleConfirmModal}>Completar</button>
+                    <button className={styles.editBtn} disabled={handleData.estado === "completado" || handleData.estado === "cancelado"} >Editar</button>
+                    <button className={styles.cancelBtn} onClick={toggleCancelModal} disabled={handleData.estado === "completado" || handleData.estado === "cancelado"}>Cancelar</button>
+                    <button className={styles.completeBtn} onClick={toggleConfirmModal} disabled={handleData.estado === "completado" || handleData.estado === "cancelado"}>Completar</button>
                 </section>
             </article>
             <AppointmentConfirmModal show={showConfirmModal} toggleConfirmModal={toggleConfirmModal}/>

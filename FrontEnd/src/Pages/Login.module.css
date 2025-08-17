@@ -36,7 +36,8 @@
     font-weight: bold;
 }
 
-label,input{
+label,
+input{
     display: block;
 }
 

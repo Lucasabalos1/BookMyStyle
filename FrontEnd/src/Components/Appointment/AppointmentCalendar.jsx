@@ -1,9 +1,12 @@
 import FullCalendar from "@fullcalendar/react"
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";         
+import styles from "./AppointmentCalendar.module.css"
+
 export const AppointmentCalendar = ({ events, onEventClick }) => {
   return (
-    <FullCalendar
+    <div className={styles.calendarBackground}>
+      <FullCalendar
       plugins={[
         dayGridPlugin,
         timeGridPlugin
@@ -15,5 +18,6 @@ export const AppointmentCalendar = ({ events, onEventClick }) => {
       eventClick={onEventClick} // Función que se ejecuta al clickear un evento
       nowIndicator={true}       // Línea que indica la hora actual
     />
+    </div>
   );
 };

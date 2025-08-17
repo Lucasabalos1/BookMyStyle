@@ -95,40 +95,60 @@ export const AppointmentCreate = () => {
       <div className={styles.mainContainer}>
         <h2>Carga de turnos</h2>
         <section className={styles.formContainer}>
+          <p className={styles.formTitle}>Complete el formulario con los datos del turno</p>
           <form onSubmit={onSubmitAppointment}>
-            <p className={styles.formTitle}>Complete el formulario con los datos del turno</p>
+            <div className={styles.blockContainer}>
+              <label htmlFor="date">Fecha</label>
+              <input type="date" name="date" id="date" value={dateValue} onChange={onInputChange}/>
+            </div>
 
-            <label htmlFor="date">Fecha</label>
-            <input type="date" name="date" id="date" value={dateValue} onChange={onInputChange}/>
+            <div className={styles.blockContainer}>
+              <label htmlFor="time">Hora</label>
+              <input type="time" name="time" id="time" min={"9:00"} max={"20:00"} value={timeValue} onChange={onInputChange}/>
+            </div>
 
-            <label htmlFor="time">Hora</label>
-            <input type="time" name="time" id="time" step={1800} value={timeValue} onChange={onInputChange}/>
+            <div className={styles.blockContainer}>
+              <label htmlFor="service">Servicio</label>
+              <select name="service" id="service" value={serviceValue} onChange={onInputChange}>
+                <option value="">Seleccione el servicio</option>
+                {serviceList.map((service) => (
+                  <option key={service.id} value={service.id}>{service.nombre}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className={styles.blockContainer}>
+                <label htmlFor="client">Cliente</label>
+              <select name="client" id="client" value={clientValue} onChange={onInputChange}>
+                <option value="">Seleccione el cliente</option>
+                {clientlist.map((client) => (
+                  <option key={client.id} value={client.id}>{`${client.nombre} ${client.apellido}`}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className={styles.blockContainer}>
+              <label htmlFor="Employee">Empleado</label>
+              <input type="text" value={employeeValue.usuario} disabled={true}/>
+            </div>
+
             
-            <label htmlFor="service">Servicio</label>
-            <select name="service" id="service" value={serviceValue} onChange={onInputChange}>
-              <option value="">Seleccione el servicio</option>
-              {serviceList.map((service) => (
-                <option key={service.id} value={service.id}>{service.nombre}</option>
-              ))}
-            </select>
+            <div className={styles.blockContainer}>
+              <label htmlFor="Employee">Estado</label>
+              <input type="text" value={"confirmado"} disabled={true}/>
+            </div>
 
-            <label htmlFor="client">Cliente</label>
-            <select name="client" id="client" value={clientValue} onChange={onInputChange}>
-              <option value="">Seleccione el cliente</option>
-              {clientlist.map((client) => (
-                <option key={client.id} value={client.id}>{`${client.nombre} ${client.apellido}`}</option>
-              ))}
-            </select>
-
-            <label htmlFor="Employee">Empleado</label>
-            <input type="text" value={employeeValue.usuario} disabled={true}/>
-
-            <label htmlFor="Employee">Estado</label>
-            <input type="text" value={"confirmado"} disabled={true}/>
-
+            
+            <div className={`${styles.blockContainer} ${styles.note}`}>
             <label htmlFor="note">Nota</label>
-            <textarea name="note" id="note" value={noteValue} onChange={onInputChange}></textarea>
-
+              <input
+                name="note"
+                id="note"
+                placeholder="Ingrese una nota (opcional)"
+                value={noteValue}
+                onChange={onInputChange}
+              />
+            </div>
             <button className={styles.confirmAppointment}>Confirmar turno</button>
 
           </form>

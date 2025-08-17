@@ -8,9 +8,138 @@
     opacity: 0;
     visibility: hidden;
     transition: 0.3s all linear;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .showCard{
     opacity: 1;
     visibility: visible;
+}
+
+.cardContainer{
+    width: 90%;
+    background-color: #0F172B;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px 0px #fff;
+
+}
+
+.headerCont{
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerCont h2{
+    font-size: 1.3rem;
+}
+
+.closeBtn{
+    border: none;
+    font-weight: bold;
+    font-size: 1.3rem;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+
+.appointmentInfoCont,
+.appointmentUserCont{
+    padding: 5px 10px;
+}
+
+.infoTitleCont,
+.userInfoTitleCont{
+    display: flex;
+    align-items: center;
+}
+
+.infoTitleCont h3,
+.userInfoTitleCont h3{
+    margin-left: 5px;
+    font-size: 1.4rem;
+}
+
+.appointmentInfo,
+.appointmentClientInfo{
+    background-color: #151F33;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    margin: 10px 0;
+    border-radius: 7px;
+}
+
+.ulInfoCont,
+.ulClientInfoCont{
+    padding: 5px 0 5px 10px;
+    list-style: none;
+}
+
+.liInfoCont,
+.liClientInfoCont{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin: 10px 0;
+}
+
+.liLabel{
+    display: flex;
+    align-items: center;
+    color: oklch(0.708 0 0);
+}
+
+
+.liLabel span{
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.buttonsControlerSection{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.buttonsControlerSection button{
+    margin: 0 5px;
+    padding: 5px 20px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.editBtn{
+    background-color: #155DFC;
+}
+
+.cancelBtn{
+    background-color: #E7000B;
+}
+
+.completeBtn{
+    background-color: #00A63E;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (min-width: 900px) {
+   .cardContainer{
+        width: 50%;
+        max-width: 600px;
+   }
+
+   
+    .headerCont h2{
+        font-size: 1.5rem;
+    }
 }
