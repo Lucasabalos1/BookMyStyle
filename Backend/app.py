@@ -391,8 +391,8 @@ def completar_turno(id):
     if not appointment:
         return jsonify({"success": False, "message": "El turno que se desea completar no existe"}),404
     
-    if appointment.state == EstadoTurno.COMPLETADO:
-        return jsonify({"success": False, "message": "El turno ya se encuentra completado"}),409
+    if appointment.state == EstadoTurno.COMPLETADO or appointment.state == EstadoTurno.CANCELADO:
+        return jsonify({"success": False, "message": "El turno ya se encuentra completado o cancelado"}),409
     
     appointment.state = EstadoTurno.COMPLETADO
     
