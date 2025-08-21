@@ -429,10 +429,93 @@ def get_services():
         services.append({"id": service.id,
                          "nombre": service.name,
                          "tiempo": service.time,
-                         "precio": service.price
+                         "precio": float(service.price)
                          })
     
     return jsonify({"success": True, "data": services}),200
+
+@app.route("/addServices", methods=["POST"])
+def add_services():
+    data = request.get_json()
+    name = data.get("nombre")
+    time = data.get("tiempo")
+    price = data.get("precio")
+    
+    if not name or not time or not price:
+        return jsonify({"success": False, "message": "Los campos no pueden quedar vacios"}),400
+    
+    serviceExist = Servicio.query.filter_by(name=name).first()
+    
+    if serviceExist:
+        return jsonify({"success": False, "message": "El servicio ya existe"}),400
+
+    try:
+        time = int(time)
+        price = Decimal(price).quantize(Decimal("0.01"))  # fuerza 2 decimales
+    except:
+        return jsonify({"success": False, "message": "Tiempo o precio inválido"}), 400
+    
+    if int(time) <= 0 or Decimal(price) <= 0:
+        return jsonify({"success": False, "message": "Tiempo y precio deben ser mayores a 0"}), 400
+    
+    service = Servicio(name=name, time=int(time), price=Decimal(price))
+    
+    db.session.add(service)
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "El servicio fue creado con exito"}),201
+
+@app.route("/editServices/<int:id>", methods=["PUT"])
+def edit_services(id):
+    data = request.get_json()
+    name = data.get("nombre")
+    time = data.get("tiempo")
+    price = data.get("precio")
+    
+    if not name or not time or not price:
+        return jsonify({"success": False, "message": "Los campos no pueden quedar vacios"}),400
+    
+    try:
+        time = int(time)
+        price = Decimal(price).quantize(Decimal("0.01"))  # fuerza 2 decimales
+    except:
+        return jsonify({"success": False, "message": "Tiempo o precio inválido"}), 400
+    
+    if int(time) <= 0 or Decimal(price) <= 0:
+        return jsonify({"success": False, "message": "Tiempo y precio deben ser mayores a 0"}), 400
+    
+    
+    service = Servicio.query.get(id)
+    
+    if not service:
+        return jsonify({"success": False, "message": "El servicio no existe"}), 404
+    
+    existing = Servicio.query.filter(Servicio.name == name, Servicio.id != id).first()
+    
+    if existing:
+        return jsonify({"success": False, "message": "Ya existe otro servicio con ese nombre"}), 400
+    
+    service.name = name
+    service.time = int(time)
+    service.price = Decimal(price)
+    
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "El servicio fue editado con exito"}),200
+
+@app.route("/deleteServices/<int:id>", methods=["DELETE"])
+def delete_services(id):
+    service = Servicio.query.get(id)
+    
+    if not service:
+        return jsonify({"success": False, "message": "El servicio no existe"}),404
+    
+    db.session.delete(service)
+    db.session.commit()
+    
+    return jsonify({"success": True, "message": "El servicio se elimino correctamente"}),200
+    
+    
     
 
 @app.route("/")
