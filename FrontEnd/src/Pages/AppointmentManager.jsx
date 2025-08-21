@@ -14,6 +14,7 @@ export const AppointmentManager = () => {
 
   const [showCard, setShowCard] = useState(false)
   const [handleData, setHandleData] = useState([])
+
   const getAppointments = async () => {
     const response = await fetch("http://127.0.0.1:5000/getTurnos")
     const data = await response.json()
@@ -105,6 +106,11 @@ export const AppointmentManager = () => {
     toggleModalCard()
   }
 
+  const refreshAppointments = async () => {
+    await getAppointments(); 
+    getEvents();             
+  };
+
   useEffect(() => {
     getAppointments();
     getData();
@@ -127,7 +133,7 @@ export const AppointmentManager = () => {
           onEventClick={handleEventClick} 
         />        
       </div>
-      <AppointmentCard show={showCard} handleData={handleData} toggleModalCard={toggleModalCard }/>
+      <AppointmentCard show={showCard} handleData={handleData} toggleModalCard={toggleModalCard} refreshAppointments={refreshAppointments}/>
 
     </>
   )

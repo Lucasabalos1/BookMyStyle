@@ -2,11 +2,13 @@ import styles from "./AppointmentCard.module.css"
 import { AppointmentConfirmModal } from './AppointmentConfirmModal'
 import { AppointmentCancelModal } from './AppointmentCancelModal'
 import { useState } from "react"
+import { AppointmentEditModal } from "./AppointmentEditModal"
 
-export const AppointmentCard = ({show, handleData, toggleModalCard}) => {
+export const AppointmentCard = ({show, handleData, toggleModalCard, refreshAppointments}) => {
   
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const [showCancelModal, setShowCancelModal] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
 
   const toggleConfirmModal = () =>{
     setShowConfirmModal(!showConfirmModal)
@@ -16,6 +18,9 @@ export const AppointmentCard = ({show, handleData, toggleModalCard}) => {
     setShowCancelModal(!showCancelModal)
   }
 
+  const toggleEditModal = () =>{ 
+    setShowEditModal(!showEditModal)
+  }
   return (
     <>
         <div className={`${styles.modalBackground} ${show ? styles.showCard : ""}`}>
@@ -119,13 +124,14 @@ export const AppointmentCard = ({show, handleData, toggleModalCard}) => {
                 </section>
 
                 <section className={styles.buttonsControlerSection}>
-                    <button className={styles.editBtn} disabled={handleData.estado === "completado" || handleData.estado === "cancelado"} >Editar</button>
+                    <button className={styles.editBtn} onClick={toggleEditModal} disabled={handleData.estado === "completado" || handleData.estado === "cancelado"} >Editar</button>
                     <button className={styles.cancelBtn} onClick={toggleCancelModal} disabled={handleData.estado === "completado" || handleData.estado === "cancelado"}>Cancelar</button>
                     <button className={styles.completeBtn} onClick={toggleConfirmModal} disabled={handleData.estado === "completado" || handleData.estado === "cancelado"}>Completar</button>
                 </section>
             </article>
-            <AppointmentConfirmModal show={showConfirmModal} toggleConfirmModal={toggleConfirmModal}/>
-            <AppointmentCancelModal show={showCancelModal} toggleCancelModal={toggleCancelModal} />
+            <AppointmentConfirmModal show={showConfirmModal} toggleConfirmModal={toggleConfirmModal} appointmentId={handleData.id} refreshAppointments={refreshAppointments}  />
+            <AppointmentCancelModal show={showCancelModal} toggleCancelModal={toggleCancelModal} appointmentId={handleData.id} refreshAppointments={refreshAppointments}  />
+            <AppointmentEditModal show={showEditModal} toggleEditModal={toggleEditModal} appointmentId={handleData.id} refreshAppointments={refreshAppointments}    />
         </div>      
     </>
   )

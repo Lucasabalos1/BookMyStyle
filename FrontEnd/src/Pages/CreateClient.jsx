@@ -37,9 +37,9 @@ export const CreateClient = () => {
 
       //Cambiar esto por la libreria de notificaciones
       if (data.success) {
-        alert("Empleado creado con exito")
+        alert("cliente creado con exito")
       }else{
-        alert("Error al crear el empleado")
+        alert("Error al crear el cliente")
       }
 
     } catch (error) {
