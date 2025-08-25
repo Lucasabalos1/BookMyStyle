@@ -65,6 +65,18 @@ export const Navbar = ({show, toggleNavbar}) => {
                             </div>
                         </div>
                     </div>
+
+                    <div className={styles.sectionContainer}>
+                        <h2 className={styles.sectionTitle}>Servicios</h2>
+                        <div className={styles.sectionNavListContainer}>
+                            <div className={styles.sectionNavContainer}>
+                                <NavLink to='/serviceManager' className={styles.navLink}>
+                                    <i className="fa-solid fa-star"></i>
+                                    <h3>Gestion de servicios</h3>
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
