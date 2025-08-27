@@ -1,0 +1,59 @@
+.cardContainer{
+    background: #1E293B;
+    border-radius: 5px;
+    padding: 10px 15px;
+    border: 1px solid #fff;
+    box-shadow: 0px 0px 4px 0px #fff;
+}
+
+.headerCard{
+    text-align: center;
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.infoServiceContainer{
+    display: flex;
+    justify-content: space-between ;
+    padding: 10px 0;
+}
+
+.separator{
+    width: 3px;
+    height: inherit;
+    background: #fff;
+}
+
+
+.timeContainer span,
+.priceContainer span{
+    margin-left: 3px;
+}
+
+.priceContainer i{
+    color: greenyellow;
+}
+
+.buttonsContainer{
+    padding: 5px 0 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.buttonsContainer button{
+    width: 80px;
+    padding: 3px 0;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.editBtn{
+    background-color: #155DFC;
+}
+
+.deleteBtn{
+    background-color: #E7000B;
+}

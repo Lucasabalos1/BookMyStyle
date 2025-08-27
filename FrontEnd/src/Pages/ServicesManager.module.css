@@ -15,4 +15,57 @@
     border-radius: 10px;
     border: 1px solid #fff;
     box-shadow: 0px 0px 6px 0px #fff;
+    /* width: 90%;
+    margin: 0 auto; */
+}
+
+.headerContainer{
+    padding: 10px 0;
+}
+
+.addServiceBtn{
+    padding: 5px 20px;
+    color: #fff;
+    background-color: #E91E63;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s all linear;
+}
+
+.addServiceBtn:hover{
+    background-color: #f88dbe;
+    color: #000;
+}
+
+.serviceListContainer{
+    margin: 5px 0;
+}
+
+.ulService{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(1, max(250px));
+    justify-content: center;
+}
+
+.liService{
+    margin: 15px 0;
+}
+
+@media (min-width: 900px) {
+
+    .mainContainer{
+        width: 75%;
+    }
+
+    .ulService{
+        grid-template-columns: repeat(3, max(275px));
+        justify-content: space-around;
+    }
+
+    .titleContainer{
+        font-size: 1.7rem;
+    }
 }

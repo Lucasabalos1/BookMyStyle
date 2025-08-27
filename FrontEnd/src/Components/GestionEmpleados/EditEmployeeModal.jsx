@@ -81,7 +81,7 @@ export const EditEmployeeModal = ({show, toggleEditModal,employee, getEmployee})
                 </div>
                 <h2>Complete los datos para editar al empleado</h2>
       
-                      <label htmlFor="correoEdit">Email</label>
+                <label htmlFor="correoEdit">Email</label>
                 <input type="email" name="correoEdit"  placeholder="Ingrese el correo del nuevo empleado" value={emailEditValue} onChange={onInputChange} />
       
                 <label htmlFor="passwordEdit">Contraseña</label>

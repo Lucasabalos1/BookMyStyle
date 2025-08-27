@@ -12,10 +12,12 @@ export const ServiceCard = ({service}) => {
 
         <div className={styles.infoServiceContainer}>
             <div className={styles.timeContainer}>
-                <span className={styles.timeService}>{service.tiempo} minutos</span>
+                <i className="fa-solid fa-clock"></i>
+                <span className={styles.timeService}>{service.tiempo} min</span>
             </div>
             <span className={styles.separator}></span>
             <div className={styles.priceContainer}>
+                <i className="fa-solid fa-dollar-sign"></i>
                 <span className={styles.priceService}>{service.precio}</span>
             </div>
         </div>
