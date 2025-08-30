@@ -431,7 +431,7 @@ def get_services():
                          "tiempo": service.time,
                          "precio": float(service.price)
                          })
-    
+
     return jsonify({"success": True, "data": services}),200
 
 @app.route("/addServices", methods=["POST"])
@@ -440,7 +440,7 @@ def add_services():
     name = data.get("nombre")
     time = data.get("tiempo")
     price = data.get("precio")
-    
+
     if not name or not time or not price:
         return jsonify({"success": False, "message": "Los campos no pueden quedar vacios"}),400
     
@@ -483,8 +483,9 @@ def edit_services(id):
     
     if int(time) <= 0 or Decimal(price) <= 0:
         return jsonify({"success": False, "message": "Tiempo y precio deben ser mayores a 0"}), 400
-    
-    
+
+
+
     service = Servicio.query.get(id)
     
     if not service:
@@ -514,8 +515,44 @@ def delete_services(id):
     db.session.commit()
     
     return jsonify({"success": True, "message": "El servicio se elimino correctamente"}),200
+
+@app.route("/turnos/historial", methods=["GET"])
+def historial_turnos():
+    empleado_id = request.args.get("empleado", type=int)
+    cliente_id = request.args.get("cliente", type=int)
+    fecha = request.args.get("fecha")
+
+    query = Turno.query.filter(Turno.state == EstadoTurno.COMPLETADO)
+
+    if empleado_id:
+        query = query.filter(Turno.empleado_id == empleado_id)
+    if cliente_id:
+        query = query.filter(Turno.cliente_id == cliente_id)
+    if fecha:
+        try:
+            fecha = datetime.strptime(fecha, "%Y-%m-%d").date()
+            query = query.filter(Turno.date == fecha)
+        except ValueError:
+            return jsonify({"success": False, "message": "Formato de fecha inválido. Use YYYY-MM-DD"}), 400
+
+    turnos = query.all()
     
+    turnosList = []
     
+    for turno in turnos:
+        turnosList.append({
+            "id": turno.id, 
+            "fecha": turno.date.strftime("%Y-%m-%d"), 
+            "hora": turno.hour.strftime("%H:%M"),
+            "estado": turno.state.value,
+            "note": turno.note,
+            "empleado": turno.empleado_id,
+            "cliente": turno.cliente_id,
+            "servicio": turno.servicio_id
+        })
+    
+    return jsonify({"success": True, "data": turnosList}),200
+
     
 
 @app.route("/")
