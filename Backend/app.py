@@ -545,10 +545,20 @@ def historial_turnos():
             "fecha": turno.date.strftime("%Y-%m-%d"), 
             "hora": turno.hour.strftime("%H:%M"),
             "estado": turno.state.value,
-            "note": turno.note,
-            "empleado": turno.empleado_id,
-            "cliente": turno.cliente_id,
-            "servicio": turno.servicio_id
+            "empleado": {
+                "id": turno.empleado_id,
+                "nombre": turno.empleado.name,
+                "apellido": turno.empleado.last_name
+                },
+            "cliente":{
+                "id": turno.cliente.id,
+                "nombre": turno.cliente.name,
+                "apellido": turno.cliente.last_name
+                },
+            "servicio": {
+                "id": turno.servicio.id,
+                "nombre": turno.servicio.name
+            }
         })
     
     return jsonify({"success": True, "data": turnosList}),200
