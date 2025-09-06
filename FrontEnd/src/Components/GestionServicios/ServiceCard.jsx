@@ -1,6 +1,23 @@
 import styles from './serviceCard.module.css'
+import { EditServiceModal } from './EditServiceModal'
+import { useState } from 'react'
+import { DeleteServiceModal } from './DeleteServiceModal'
 
-export const ServiceCard = ({service}) => {
+export const ServiceCard = ({service, getServices}) => {
+  
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+
+
+  const toggleEditModal = () => {
+    setShowEditModal(!showEditModal)
+  }
+
+  const toggleDeleteModal = () => {
+    setShowDeleteModal(!showDeleteModal)
+  }
+
+
   return (
     <>
       <article className={styles.cardContainer}>
@@ -23,10 +40,12 @@ export const ServiceCard = ({service}) => {
         </div>
 
         <div className={styles.buttonsContainer}>
-            <button className={styles.editBtn}>Editar</button>
-            <button className={styles.deleteBtn}>Eliminar</button>
+            <button className={styles.editBtn} onClick={toggleEditModal}>Editar</button>
+            <button className={styles.deleteBtn} onClick={toggleDeleteModal}>Eliminar</button>
         </div>
       </article>
+    <EditServiceModal show={showEditModal} toggleEditModal={toggleEditModal} service={service} getServices={getServices}/>
+    <DeleteServiceModal show={showDeleteModal} toggleDeleteModal={toggleDeleteModal} service={service} getServices={getServices} />
     </>
   )
 }

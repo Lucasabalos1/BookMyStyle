@@ -63,6 +63,12 @@ export const Navbar = ({show, toggleNavbar}) => {
                                     <h3>Ver turnos</h3>
                                 </NavLink>
                             </div>
+                            <div className={styles.sectionNavContainer}>
+                                <NavLink to='/appointmentHistory' className={styles.navLink}>
+                                    <i className="fa-solid fa-clock-rotate-left"></i>
+                                    <h3>Historial de turnos</h3>
+                                </NavLink>
+                            </div>
                         </div>
                     </div>
 

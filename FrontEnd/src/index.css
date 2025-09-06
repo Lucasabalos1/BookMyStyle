@@ -21,3 +21,17 @@ body{
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
+/* h2{
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #FF4ED2;
+    text-align: center;
+    letter-spacing: 1px;
+    margin: 24px 0 18px 0;
+    text-shadow: 0 2px 8px rgba(255, 78, 210, 0.08);
+    background: linear-gradient(90deg, #FF4ED2 0%, #7C5CFA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+} */

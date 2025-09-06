@@ -46,7 +46,7 @@ export const ServicesManager = () => {
                 <ul className={styles.ulService}>
                     {serviceList.map((service) => (
                         <li key={service.id} className={styles.liService}>
-                            <ServiceCard service={service} />                         
+                            <ServiceCard service={service} getServices={getServices} />                         
                         </li>
                     ))}
                 </ul>

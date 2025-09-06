@@ -1,0 +1,71 @@
+.filterContainer{
+    background-color: #00000060;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    padding: 10px;
+    /* backdrop-filter: blur(6px); Solo desenfoca el fondo */
+}
+
+.filterTitle{
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.inputsContainer{
+    margin-bottom: 15px;
+}
+
+.inputBlock label{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.inputBlock select,
+.inputBlock input {
+    border: 1px solid #B0B0B0;
+    background: #2D254D;
+    color: #fff;
+}
+
+.clearBtnContainer{
+    display: flex;
+    justify-content: center;
+    padding: 5px 0 10px;
+}
+.clearBtn{
+    background-color: #2D254D;
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+@media (min-width: 900px) {
+    .inputsContainer {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px; 
+    }
+
+    .inputBlock {
+        width: 32%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .inputBlock input,
+    .inputBlock select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .inputBlock label{
+        margin: 0;
+    }
+
+}

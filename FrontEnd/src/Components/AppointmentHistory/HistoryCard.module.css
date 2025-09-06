@@ -1,0 +1,109 @@
+.cardContainer{
+    background-color: #201C3A;
+    border: 1px solid #FF4ED2;
+    border-radius: 7px;
+    padding: 10px;
+}
+.headerCard{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #B0B0B0;
+    margin: 5px 0 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.serviceName,
+.serviceDate,
+.serviceTime{
+    display: flex;
+    align-items: center;
+
+}
+
+.serviceTime{
+    margin-top: 5px;
+}
+
+.serviceName p,
+.serviceDate p,
+.serviceTime p{
+    margin-left: 2px;
+}
+
+.serviceName i,
+.serviceDate i,
+.serviceTime i{
+    color: #FF4ED2;
+}
+
+.priceContainer{
+    width: 90%;
+    background-color: #5A2A86;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px auto 5px;
+    border-radius: 5px;
+    padding: 8px 4px;
+    font-weight: bold;
+}
+
+.priceTitle{
+    display: flex;
+    align-items: center;
+}
+
+.priceTitle p{
+    margin-left: 2px;
+}
+
+.priceTitle i{
+    color: #57e64a;
+}
+
+.infoAppointmentContainer{
+    background-color: #2A2547;
+    width: 90%;
+    margin: 20px auto 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.infoBlock{
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.logoContainer{
+    color: #B0B0B0;
+    font-size: 1.5rem;
+}
+
+
+.infoCont{
+    display: flex;
+    flex-direction: column;
+}
+
+.infoAppointmentContainer .infoBlock:nth-child(1) .infoCont,
+.infoAppointmentContainer .infoBlock:nth-child(3) .infoCont {
+    margin-left: 6px;
+}
+
+.infoAppointmentContainer .infoBlock:nth-child(2) .infoCont {
+    margin-left: 12px;
+}
+
+.sectionTitle{
+    color: #B0B0B0;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.sectionInfo{
+    color: #fff;
+}
