@@ -1,0 +1,89 @@
+input,label{
+    all: unset;
+}
+
+.dayCardContainer{
+    background-color: #3A506B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 10px;
+    border: 1px solid #fff;
+}
+
+.inputsContainer{
+    display: grid;
+    grid-gap: 2px;
+}
+
+.inputBlock{
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+    
+}
+
+.inputsContainer input{
+    background-color: #fff;
+    color: #000;
+}
+
+.checkbox{
+    display: none;
+}
+
+.stateContainer{
+    display: flex;
+}
+
+.slider{
+    margin-left: 5px;
+    width: 50px;
+    height: 20px;
+    background-color: #000;
+    border-radius: 50px;
+    padding: 5px;
+    outline: 1px solid #fff;
+    position: relative;
+}
+
+.slider::after{
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    top: 4px;
+    left: 3px;
+    border-radius: 50px;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+
+}
+
+.stateContainer input[type="checkbox"]:checked + .slider::after {
+    transform: translateX(32px)
+}
+
+.open{
+    color: #00c721;
+}
+
+.closed{
+    color: #ff0000;
+}
+
+@media (min-width: 900px) {
+    .inputsContainer{
+        grid-template-columns: repeat(2,1fr);
+        gap: 50px;
+    }
+
+    .inputBlock{
+        justify-content: center;
+    }
+
+    .inputBlock input{
+        margin-left: 5px;
+    }
+
+}
