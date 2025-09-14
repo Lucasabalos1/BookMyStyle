@@ -39,3 +39,38 @@
     grid-gap: 15px;
     margin-top: 20px;
 }
+
+.confirmSaveBtn{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.saveBtn{
+    padding: 5px 15px;
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    outline: 1px solid #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.changeMsg{
+    font-size: 1rem;
+    color: #ff0000;
+    padding-top: 10px;
+}
+
+.hideMsg{
+    display: none;
+}
+
+@media (min-width: 900px) {
+    .scheduleContainer{
+        grid-template-columns: repeat(1, 90%);
+        justify-content: center;
+    }
+}
