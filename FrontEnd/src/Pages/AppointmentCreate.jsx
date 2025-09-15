@@ -2,6 +2,8 @@ import styles from "./AppointmentCreate.module.css"
 import { Header } from "../Components/Global/Header"
 import { useEffect, useState } from "react"
 
+const days = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+
 export const AppointmentCreate = () => {
   
   const [dateValue, setDateValue] = useState("")
@@ -32,8 +34,39 @@ export const AppointmentCreate = () => {
     setNoteValue("")
   }
 
+  const validateSchedule = () => {
+      const schedule = JSON.parse(localStorage.getItem("schedule"))
+
+      if (!schedule) {
+        alert("Todavia no se configuraron los dias y horarios, por favor dirigirse a configuracion de peluqueria")
+        return false
+      }
+
+      const date = new Date(dateValue)
+
+      const day = days[date.getDay()]
+
+      const item = schedule.find(d => d.dia === day)
+      
+      if(!item.datos.estaAbierto){
+        alert(`El dia ${day} la peluqueria se encuentra cerrada`)
+        return false;
+      }
+
+      if (timeValue < item.datos.Desde || timeValue > item.datos.Hasta) {
+        alert(`Se encuentra fuera de los limites de atencion, ingrese un valor entre las ${item.datos.Desde} y las ${item.datos.Hasta}`)
+        return false;
+      }
+
+      return true
+  }
+
   const onSubmitAppointment = async (event) => {
     event.preventDefault()
+
+    if (!validateSchedule()) {
+      return;
+    }
 
     try {
       const response = await fetch("http://127.0.0.1:5000/addTurno",{
