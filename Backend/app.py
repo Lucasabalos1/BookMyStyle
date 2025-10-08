@@ -6,6 +6,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from enum import Enum
 from decimal import Decimal
 import datetime
+
+
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'instance', 'peluqueria.db')}"
@@ -563,8 +565,185 @@ def historial_turnos():
     
     return jsonify({"success": True, "data": turnosList}),200
 
+
+# def calcularPromedioPorEmpleado(turnos):
+#     hoy = datetime.datetime.now()
+#     mes_actual = hoy.month
+#     anio_actual = hoy.year
+    
+#     turnos_mes_actual = [
+#         turno for turno in turnos
+#         if turno.date.month == mes_actual and turno.date.year == anio_actual
+#     ]
+    
+#     pormedio = len(turnos_mes_actual) / 4
+    
+#     return round(pormedio, 2)
+
+def calcularIngresosPorEmpleado(turnos):
+    ingresos = 0
+    
+    for turno in turnos:
+        ingresos += float(turno.servicio.price)
+        
+    return ingresos
+    
+def obtenerDatosEmpleados(empleado):
+    cantidad_turnos = Turno.query.filter( Turno.empleado_id == empleado.id, Turno.state == EstadoTurno.COMPLETADO).all()
+    
+    ingresos_del_empleado = calcularIngresosPorEmpleado(cantidad_turnos)
+    
+    worker = {
+        "nombre": empleado.name,
+        "turnos": len(cantidad_turnos),
+        "ingresos": ingresos_del_empleado,
+        # "promedio_turnos_por_semana": calcularPromedioPorEmpleado(cantidad_turnos)
+    }
+    
+    return worker
     
 
+@app.route("/metricas/empleados", methods=["GET"])
+def getMetricasEmpleados():
+    empleados = Empleado.query.all()
+    
+    if not empleados:
+        return jsonify({"success": False, "message": "No hay empleados en la base de datos"}),404
+    
+    workers = []
+    
+    for empleado in empleados:
+        datos_empleado = obtenerDatosEmpleados(empleado)
+        workers.append(datos_empleado)
+    
+    return jsonify({"success": True, "data": workers}),200
+
+
+def obtenerDatosClientes(cliente):
+    turnos = Turno.query.filter(Turno.cliente_id == cliente.id, Turno.state == EstadoTurno.COMPLETADO).all()
+    
+    client = {
+        "nombre": cliente.name,
+        "cantidad_de_atenciones": len(turnos)
+    }
+    
+    return client
+
+
+@app.route("/metricas/clientes", methods=["GET"])
+def getMetricasClientes():
+    clientes = Cliente.query.all()
+    turnos = Turno.query.all()
+    
+    if not clientes:
+        return jsonify({"success": False, "message": "No hay clientes en la base de datos"}),404
+
+    top_clients = []
+    
+    for cliente in clientes:
+        datos_cliente = obtenerDatosClientes(cliente)
+        top_clients.append(datos_cliente)
+        
+    top_clients.sort(key=lambda c: c["cantidad_de_atenciones"], reverse=True)
+    
+    clients = {
+        "top_clientes": top_clients,
+        "promedio_turno_por_cliente": round(len(turnos) / len(clientes), 2) if clientes else 0,
+        "distribucion_por_sexo": [{
+            "sexo": "Masculino",
+            "cantidad": len(Cliente.query.filter(Cliente.genre == "Masculino").all())
+        },
+        {
+            "sexo": "Femenino",
+            "cantidad": len(Cliente.query.filter(Cliente.genre == "Femenino").all())
+        },
+        ]
+    }
+    
+    return jsonify({"success": True, "data": clients}),200 
+
+def obtenerIngresosPorMes(mes, turnos):
+    ingresos = 0
+    for turno in turnos:
+        if turno.date.month == mes:
+            ingresos += float(turno.servicio.price)
+    return round(ingresos,2)
+
+def obtenerPorcentaje(mes_anterior, mes_actual):
+    porcentaje = ((mes_actual - mes_anterior) / mes_anterior) * 100
+    return round(porcentaje,2)
+
+@app.route("/metricas/ingresos", methods=["GET"])
+def getMetricasIngresos():
+    turnos_completados = Turno.query.filter(Turno.state == EstadoTurno.COMPLETADO).all()
+
+    if not turnos_completados:
+        return jsonify({"success": False, "message": "No hay turnos completos"}),404
+    
+    hoy = datetime.datetime.now()
+    mes_actual = hoy.month
+    mes_anterior = mes_actual - 1 if mes_actual > 1 else 12
+
+    ingresos_mes_actual = obtenerIngresosPorMes(mes_actual, turnos_completados)
+    ingresos_mes_anterior = obtenerIngresosPorMes(mes_anterior, turnos_completados)
+    
+    ingresos_mensual = {
+        "ingresos_mes_anterior": ingresos_mes_anterior,
+        "ingresos_mes_actual": ingresos_mes_actual,
+        "porcetaje_diferencia": obtenerPorcentaje(ingresos_mes_anterior,ingresos_mes_actual)
+    }
+
+    ingresos_por_dia = { 
+        "Lunes": 0, "Martes": 0, "Miércoles": 0, "Jueves": 0, "Viernes": 0, "Sábado": 0, "Domingo": 0
+    }
+    for turno in turnos_completados:
+        dia_semana = turno.date.strftime("%A")
+        dias_trad = {
+            "Monday": "Lunes", "Tuesday": "Martes", "Wednesday": "Miércoles",
+            "Thursday": "Jueves", "Friday": "Viernes", "Saturday": "Sábado", "Sunday": "Domingo"
+        }
+        dia = dias_trad.get(dia_semana, dia_semana)
+        ingresos_por_dia[dia] += float(turno.servicio.price)
+
+    servicios_facturacion = {}
+    for turno in turnos_completados:
+        nombre_servicio = turno.servicio.name
+        servicios_facturacion[nombre_servicio] = servicios_facturacion.get(nombre_servicio, 0) + float(turno.servicio.price)
+    top_servicios = sorted(servicios_facturacion.items(), key=lambda x: x[1], reverse=True)
+    top_servicios = [{"servicio": nombre, "ingresos": round(ingresos,2)} for nombre, ingresos in top_servicios]
+
+    data = {
+        "ingresos_mensual": ingresos_mensual,
+        "ingresos_por_dia_semana": ingresos_por_dia,
+        "top_servicios_facturacion": top_servicios
+    }
+    return jsonify({"success": True, "data": data}), 200
+
+@app.route("/metricas/servicios", methods=["GET"])
+def getMetricasServicios():
+    turnos_completados = Turno.query.filter(Turno.state == EstadoTurno.COMPLETADO).all()
+    
+    servicios = Servicio.query.all()
+    
+    services = []
+    
+    for servicio in servicios:
+        cantidad_de_turnos_por_servicio = 0
+        ingresos_por_servicio = 0
+        nombre_servicio = servicio.name
+        for turno in turnos_completados:
+            if turno.servicio.name == nombre_servicio:
+                cantidad_de_turnos_por_servicio+=1
+                ingresos_por_servicio+= float(turno.servicio.price)
+        service = {
+            "nombre": nombre_servicio,
+            "cantidad_de_turnos": cantidad_de_turnos_por_servicio,
+            "ingresos": ingresos_por_servicio
+        }
+        services.append(service)
+    return jsonify({"success": True, "data": services}),200 
+
+   
 @app.route("/")
 def index():
     return jsonify({"message": "Backend funcionando correctamente"})
