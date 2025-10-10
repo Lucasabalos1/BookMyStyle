@@ -11,6 +11,7 @@ import { AppointmentManager } from './Pages/AppointmentManager';
 import { ServicesManager } from './Pages/ServicesManager';
 import { AppointmentsHistoryPage } from './Pages/AppointmentsHistoryPage';
 import { WorkHoursManager } from './Pages/WorkHoursManager';
+import { MetricsPage } from './Pages/MetricsPage';
 
 export const App = () => {
   return (
@@ -26,6 +27,7 @@ export const App = () => {
         <Route path='/appointmentHistory' element={<PrivateRoute role={['user_admin', 'user_empleado']}><AppointmentsHistoryPage/></PrivateRoute>}/>
         <Route path='/serviceManager' element={<PrivateRoute role={['user_admin', 'user_empleado']}><ServicesManager/></PrivateRoute>}/>
         <Route path='/workManager' element={<PrivateRoute role={'user_admin'}><WorkHoursManager /></PrivateRoute>} />
+        <Route path='/metricsPage' element={<PrivateRoute role={['user_admin', 'user_empleado']}><MetricsPage/></PrivateRoute>}/>
         <Route path='/' element={<Navigate to="/login" />}/>
       </Routes>
     </>

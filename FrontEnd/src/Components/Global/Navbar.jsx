@@ -85,6 +85,18 @@ export const Navbar = ({show, toggleNavbar}) => {
                     </div>
 
                     <div className={styles.sectionContainer}>
+                        <h2 className={styles.sectionTitle}>Metricas</h2>
+                        <div className={styles.sectionNavListContainer}>
+                            <div className={styles.sectionNavContainer}>
+                                <NavLink to='/metricsPage' className={styles.navLink}>
+                                    <i className="fa-solid fa-signal"></i>
+                                    <h3>Gestion de metricas</h3>
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.sectionContainer}>
                         <h2 className={styles.sectionTitle}>Configuracion</h2>
                         <div className={styles.sectionNavListContainer}>
                             <div className={styles.sectionNavContainer}>
