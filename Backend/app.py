@@ -693,17 +693,22 @@ def getMetricasIngresos():
         "porcetaje_diferencia": obtenerPorcentaje(ingresos_mes_anterior,ingresos_mes_actual)
     }
 
-    ingresos_por_dia = { 
-        "Lunes": 0, "Martes": 0, "Miércoles": 0, "Jueves": 0, "Viernes": 0, "Sábado": 0, "Domingo": 0
+    # Ingresos por día de la semana como lista de objetos
+    dias_orden = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+    ingresos_por_dia_dict = {dia: 0 for dia in dias_orden}
+    dias_trad = {
+        "Monday": "Lunes", "Tuesday": "Martes", "Wednesday": "Miércoles",
+        "Thursday": "Jueves", "Friday": "Viernes", "Saturday": "Sábado", "Sunday": "Domingo"
     }
     for turno in turnos_completados:
         dia_semana = turno.date.strftime("%A")
-        dias_trad = {
-            "Monday": "Lunes", "Tuesday": "Martes", "Wednesday": "Miércoles",
-            "Thursday": "Jueves", "Friday": "Viernes", "Saturday": "Sábado", "Sunday": "Domingo"
-        }
         dia = dias_trad.get(dia_semana, dia_semana)
-        ingresos_por_dia[dia] += float(turno.servicio.price)
+        if dia in ingresos_por_dia_dict:
+            ingresos_por_dia_dict[dia] += float(turno.servicio.price)
+
+    ingresos_por_dia_semana = [
+        {"dia": dia, "ingresos": ingresos_por_dia_dict[dia]} for dia in dias_orden
+    ]
 
     servicios_facturacion = {}
     for turno in turnos_completados:
@@ -714,7 +719,7 @@ def getMetricasIngresos():
 
     data = {
         "ingresos_mensual": ingresos_mensual,
-        "ingresos_por_dia_semana": ingresos_por_dia,
+        "ingresos_por_dia_semana": ingresos_por_dia_semana,
         "top_servicios_facturacion": top_servicios
     }
     return jsonify({"success": True, "data": data}), 200
