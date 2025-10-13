@@ -48,7 +48,7 @@ export const AppointmentCard = ({show, handleData, toggleModalCard, refreshAppoi
                                     <i className="fa-solid fa-clock"></i>
                                     <span>Hora:</span>
                                 </div>
-                                <span>{handleData.start && handleData.end ? `${handleData.start.getHours()}:${handleData.start.getMinutes()} - ${handleData.end.getHours()}:${handleData.end.getMinutes()}` : ""}</span>
+                                <span>{handleData.start && handleData.end ? `${handleData.start.getHours()}:${handleData.start.getMinutes() >= 10 ? handleData.start.getMinutes() : handleData.start.getMinutes() + "0"} - ${handleData.end.getHours()}:${handleData.end.getMinutes()}` : ""}</span>
                             </li>
                             <li className={styles.liInfoCont}>
                                 <div className={styles.liLabel}>
@@ -101,7 +101,7 @@ export const AppointmentCard = ({show, handleData, toggleModalCard, refreshAppoi
                             <li className={styles.liClientInfoCont}>
                                  <div className={styles.liLabel}>
                                     <i className="fa-solid fa-id-card"></i>
-                                    <span>Nombre y apellido:</span>
+                                    <span>Cliente:</span>
                                 </div>
                                 <span>{handleData.cliente}</span>
                             </li>

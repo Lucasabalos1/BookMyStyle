@@ -64,15 +64,15 @@ export const Login = () => {
             <img src={logo} alt="logo-booymystyle" />
           </div>
 
-          <h2>LOGIN</h2>
+          <h4>Iniciar sesion para continuar</h4>
           
           <label className={styles.labelLogin} htmlFor="correo">Correo Electrónico</label>
-          <input className={styles.inputLogin} type="email" id="correo" name="correo" placeholder="Ingrese su correo" value={emailValue} onChange={onInputChange}/>
+          <input className={styles.inputLogin} type="email" id="correo" name="correo" placeholder="Ingrese su correo" value={emailValue} onChange={onInputChange} required/>
 
           <label className={styles.labelLogin} htmlFor="password">Contraseña</label>
-          <input className={styles.inputLogin} type="password" id="password" name="password" placeholder="Ingrese su contraseña" value={passwordValue} onChange={onInputChange}/>
+          <input className={styles.inputLogin} type="password" id="password" name="password" placeholder="Ingrese su contraseña" value={passwordValue} onChange={onInputChange} required/>
 
-          <button className={styles.submitButton}>LOGIN</button>
+          <button className={styles.submitButton}>Iniciar Sesion</button>
         
         </div>
 

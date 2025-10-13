@@ -14,25 +14,35 @@ nav{
 }
 
 .hamburgerContainer{
-    padding: 10px 12px;
+    padding: 8px 10px;
     border: 1px solid #fff;
     font-size: 1.5rem;
     border-radius: 10px;
     background-color: #121212;
-    color: #FF4ED2;
+    color: #ffffff;
     cursor: pointer;
 }
 
-.userContainer{
+.rightSection{
+    display: flex;
+    width: 100px;
+    justify-content: space-between;
+}
+
+.userContainer,
+.homeContainer{
     border: 1px solid #fdfdfd;
     font-size: 1.5rem;
     background-color: #000;
     color: #fff;
     border-radius: 50px;
     cursor:pointer;
-    padding: 10px 12px;
+    padding: 8px 10px;
 }
 
+.homeContainer{
+    font-size: 1.4rem !important;
+}
 
 @media (min-width: 900px) {
    .rowHeaderContent{

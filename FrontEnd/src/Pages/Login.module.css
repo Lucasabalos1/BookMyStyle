@@ -8,8 +8,8 @@
 .loginContainer{
     padding: 20px;
     background: #121212;
-    border: 1px solid #ff005c;
-    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
     width: 80%;
     margin: 0 auto;
     box-shadow: 0 0 10px rgba(255, 78, 210, 0.5);  
@@ -24,13 +24,12 @@
 .logoContainer img{
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 2px 6px rgba(90,42,134,0.5)) drop-shadow(0 1px 1px #ff4ed2);
+        /* filter: drop-shadow(0 2px 6px rgba(90,42,134,0.5)) drop-shadow(0 1px 1px #ff4ed2); */
 }
 
-.loginContainer h2{
+.loginContainer h4{
     text-shadow: rgb(73, 0, 126) -1px 1px 0px, rgb(47, 0, 217) 1px -1px 0px;
     text-align: center;
-    font-size: 1.7rem;
     margin-bottom: 30px;
     position: relative;
     font-weight: bold;
@@ -41,16 +40,25 @@ input{
     display: block;
 }
 
+.loginContainer input{
+    background-color: #0d0d0d;
+    color: #fff;
+}
+
+.loginContainer label{
+    display: inline-block;
+}
+
 .labelLogin{
     font-weight: bold;
-    padding: 20px 0 5px;
+    padding: 10px 0 5px;
 }
 
 .inputLogin{
     width: 100%;
     padding: 5px;
-    border-radius: 10px;
-    border: 1px solid #032343;
+    border-radius: 5px;
+    border: 1px solid #ddd;
     font-size: 1rem;
 }
 
@@ -68,14 +76,21 @@ input{
     padding: 5px 20px;
     border-radius: 5px;
     border: none;
-    background: linear-gradient(90deg,#5A2A86 20%, #FF4ED2 100%);
+    background: linear-gradient(90deg, #FF4ED2, #5A2A86);
+    transition: 0.3s ease;
     font-weight: bold;
-    transition: 0.5s outline linear;
+    width: 300px;
+    /* transition: 0.5s outline linear; */
     cursor: pointer;
+    color: #fff;
+    outline: 1px solid #777;
 }
 
 .submitButton:hover{
     outline: 1px solid #fff;
+    background-position: right center;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #FF4ED2;
 }
 
 @media (min-width: 900px) {

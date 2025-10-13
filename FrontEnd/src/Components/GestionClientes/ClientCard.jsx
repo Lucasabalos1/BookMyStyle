@@ -38,9 +38,14 @@ export const ClientCard = ({client, getClients}) => {
   return (
     <>
       <article className={styles.cardContainer}>
-        <p>{`${client.nombre} ${client.apellido}`}</p>
-        <span className={`${(client.genero === "Masculino") ? styles.genreMaleLabel : styles.genreFemaleLabel}`}>{client.genero}</span>
-        <p>{client.telefono}</p>
+        <div className={styles.headerContainer}>
+          <p>{`${client.nombre} ${client.apellido}`}</p>
+          <span className={`${(client.genero === "Masculino") ? styles.genreMaleLabel : styles.genreFemaleLabel}`}>{client.genero}</span>
+        </div>
+        <div className={styles.phoneContainer}>
+          <i className="fa-solid fa-phone"></i>
+          <p>{client.telefono}</p>
+        </div>
         <div className={styles.buttonsControlerContainer}>
             <button className={styles.editButton} onClick={toggleEditModal}>Editar</button>
             <button className={styles.deleteButton} onClick={toggleDeleteModal}>Eliminar</button>
