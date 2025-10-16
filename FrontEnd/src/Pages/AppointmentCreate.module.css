@@ -3,12 +3,6 @@
     margin: 0 auto;
 }
 
-.mainContainer h2{
-    text-align: center;
-    padding: 10px 0;
-    font-size: 2rem;
-}
-
 .formContainer{
     background-color: #18182C;
     border-radius: 3px;
@@ -23,10 +17,6 @@
     padding: 10px;
     font-weight: bold;
 }
-/* REVISAR 
-#note{
-    background: red !important;
-} */
 
 .confirmAppointment{
     display: block;

@@ -126,7 +126,7 @@ export const AppointmentManager = () => {
     <>
       <Header/>
       <div className={styles.mainContainer}>
-        <h1>Gestion de turnos</h1>
+        <h2 className='titleSection'>Gestion de turnos</h2>
 
         <AppointmentCalendar
           events={events}

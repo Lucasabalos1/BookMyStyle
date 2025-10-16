@@ -3,13 +3,6 @@
     margin: 0 auto;
 }
 
-.mainContainer h2{
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 10px 0;
-    text-align: center;
-}
-
 .clientsCardContainer{
     background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid #fff;

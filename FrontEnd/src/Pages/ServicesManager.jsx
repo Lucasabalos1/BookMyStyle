@@ -34,7 +34,7 @@ export const ServicesManager = () => {
 
       <section className={styles.mainContainer}>
         <div className={styles.titleContainer}>
-            <h2>Listado de servicios</h2>
+            <h2 className='titleSection'>Listado de servicios</h2>
         </div>
 
         <div className={styles.servicesContainer}>

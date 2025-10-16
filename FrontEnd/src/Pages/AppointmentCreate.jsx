@@ -126,7 +126,7 @@ export const AppointmentCreate = () => {
     <>
       <Header/>
       <div className={styles.mainContainer}>
-        <h2>Carga de turnos</h2>
+        <h2 className="titleSection">Carga de turnos</h2>
         <section className={styles.formContainer}>
           <p className={styles.formTitle}>Complete el formulario con los datos del turno</p>
           <form onSubmit={onSubmitAppointment}>

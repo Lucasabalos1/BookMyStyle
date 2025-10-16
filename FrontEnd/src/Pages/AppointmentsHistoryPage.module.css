@@ -3,12 +3,6 @@
     margin: 0 auto;
 }
 
-.mainContainer h2{
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: bold;
-}
-
 .appointmentsContainer{
     display: grid;
     margin-top: 20px;
@@ -22,7 +16,7 @@
     text-align: center;
     font-size: 1.2rem;
     min-height: 200px;
-    grid-column: 1 / -1; /* <-- esto hace que el mensaje ocupe todas las columnas */
+    grid-column: 1 / -1;
 
 }
 
@@ -30,9 +24,5 @@
     .appointmentsContainer{
         grid-template-columns: repeat(3, minmax(250px, 1fr));
         grid-gap: 20px;
-    }
-    
-    .mainContainer h2{
-        font-size: 2rem;
     }
 }

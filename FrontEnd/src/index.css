@@ -22,16 +22,31 @@ body{
     100% { background-position: 0% 50%; }
 }
 
-/* h2{
-  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    color: #FF4ED2;
+
+.titleSection {
+    /* Tipografía */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem; /* Más impacto */
+    font-weight: 900; /* Más audaz */
     text-align: center;
-    letter-spacing: 1px;
-    margin: 24px 0 18px 0;
-    text-shadow: 0 2px 8px rgba(255, 78, 210, 0.08);
-    background: linear-gradient(90deg, #FF4ED2 0%, #7C5CFA 100%);
+    letter-spacing: 2px;
+    margin: 30px 0 20px 0;
+    
+    /* Gradiente como Relleno (Se mantiene el estilo del diseño original) */
+    background: linear-gradient(90deg, #7C5CFA 0%, #FF4ED2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-} */
+    
+    /* Sombra de Brillo (Efecto Neón) - ¡El elemento clave! */
+    /* Usa los colores del gradiente para crear un resplandor elegante */
+    text-shadow: 
+        0 0 4px rgba(255, 78, 210, 0.5), /* Sombra interior suave (Rosa) */
+        0 0 10px rgba(124, 92, 250, 0.4), /* Sombra exterior media (Violeta) */
+        0 0 20px rgba(124, 92, 250, 0.2); /* Sombra exterior grande y difusa (Violeta) */
+}
+
+@media (min-width: 900px) {
+  .titleSection{
+    font-size: 2.5rem;
+  }
+}

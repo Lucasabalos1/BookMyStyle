@@ -98,7 +98,7 @@ export const WorkHoursManager = () => {
       <Header/>
       <div className={styles.mainContainer}>
         <div className={styles.titleContainer}>
-            <h2>Gestion de peluqueria</h2>
+            <h2 className='titleSection'>Gestion de peluqueria</h2>
         </div>
 
         <section className={styles.managerContainer}>

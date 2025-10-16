@@ -28,7 +28,7 @@ export const ClientManager = () => {
     <Header/>
 
     <div className={styles.mainContainer}>
-      <h2>Listado de clientes</h2>
+      <h2 className='titleSection'>Listado de clientes</h2>
 
       <section className={styles.clientsCardContainer}>
         {clients.map((client) => (

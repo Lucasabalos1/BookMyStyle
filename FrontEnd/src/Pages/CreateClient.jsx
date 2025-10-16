@@ -52,9 +52,9 @@ export const CreateClient = () => {
       <Header/>
 
       <div className={styles.mainContainer}>
-        <p className={styles.title}>Carga de clientes</p>
+        <h2 className='titleSection'>Carga de clientes</h2>
         <section className={styles.formContainer}>
-          <h2>Complete los datos para el nuevo cliente</h2>
+          <h2 >Complete los datos para el nuevo cliente</h2>
           <form onSubmit={onSubmitClient}>
             <label htmlFor="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del cliente" value={nameValue} onChange={onInputChange}/>

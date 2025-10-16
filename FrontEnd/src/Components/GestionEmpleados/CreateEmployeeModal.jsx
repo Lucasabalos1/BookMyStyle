@@ -1,5 +1,6 @@
 import { useState } from "react"
 import styles from "./CreateEmployeeModal.module.css"
+import Swal from "sweetalert2";
 
 const userRolMap = {
     "Administrador": "user_admin",
@@ -51,17 +52,31 @@ export const CreateEmployeeModal = ({show, toggleCreateModal, onEmployeeCreated}
 
       const data = await response.json()
 
-      //Cambiar por libreria de notificaciones
       if (data.success) {
-        alert("Empleado creado con exito")
+        Swal.fire({
+          icon: 'success',
+          title: 'Empleado creado con exito',
+          confirmButtonColor: '#FF4ED2'
+        })
         toggleCreateModal()
         onEmployeeCreated()
         clearInputs()
       }else{
-        alert("Error al crear el Empleado")
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al crear un empleado',
+          text: 'Revisa los datos, algo puede estar mal',
+          confirmButtonColor: '#FF4ED2'
+        })
       }
     } catch (error) {
       console.log("Hubo un error al conectarse con el servidor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
     }
     
   }

@@ -26,7 +26,7 @@ export const MetricsPage = () => {
       <Header/>
       <div className={styles.mainContainer}>
         <div className={styles.titleContainer}>
-            <h2>Gestion de metricas</h2>
+            <h2 className='titleSection'>Gestion de metricas</h2>
         </div>
 
         <section className={styles.metricsSection}>

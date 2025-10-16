@@ -3,11 +3,6 @@
     margin: 0 auto;
 }
 
-.mainContainer h2{
-    font-weight: bold ;
-    margin-bottom: 5px;
-}
-
 .addEmployeeButtonContainer{
     display: flex;
     justify-content: end;
@@ -42,10 +37,6 @@
     
     .mainContainer{
         width: 87%;
-    }
-    .mainContainer h2{
-        font-size: 2rem;
-        font-weight: bold;
     }
 
     .addEmployeeButtonContainer{

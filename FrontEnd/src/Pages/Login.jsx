@@ -44,11 +44,24 @@ export const Login = () => {
 
       localStorage.setItem("User_data", JSON.stringify(data))
 
+      Swal.fire({
+        icon: 'success',
+        title: 'Inicio de sesion correcto',
+        text: 'Bienvenido a BookMyStyle',
+        confirmButtonColor: '#FF4ED2'
+      })
+
       navigate('/dashboard')
       
       
     } catch (error) {
       console.error("Error al conectar con el servidor:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
     }
   }
 

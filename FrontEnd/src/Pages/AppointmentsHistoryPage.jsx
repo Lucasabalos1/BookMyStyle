@@ -38,7 +38,7 @@ export const AppointmentsHistoryPage = () => {
     <>
         <Header/>
         <div className={styles.mainContainer}>
-            <h2>Historial de turnos</h2>
+            <h2 className='titleSection'>Historial de turnos</h2>
             <HistoryFilter setClientInputSelected={setClientInputSelected} setEmployeeInputSelected={setEmployeeInputSelected} setDateInputSelected={setDateInputSelected}/>
             <section className={styles.appointmentsContainer}>
               {historyAppointments.length > 0 ? 

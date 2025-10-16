@@ -35,7 +35,7 @@ export const EmployeeManager = () => {
       <Header/>
 
       <div className={styles.mainContainer}>
-        <h2>Gestion de empleados</h2>
+        <h2 className='titleSection'>Gestion de empleados</h2>
         <hr/>
         <div className={styles.addEmployeeButtonContainer}>
           <button className={styles.addEmployeeButton} onClick={toggleCreateModal}>Agregar empleado</button>

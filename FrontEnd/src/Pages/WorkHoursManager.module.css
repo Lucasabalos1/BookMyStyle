@@ -3,12 +3,6 @@
     margin: 0 auto;
 }
 
-.titleContainer{
-    padding: 20px 0;
-    text-align: center;
-    font-size: 1.2rem;
-}
-
 .managerContainer{
     background-color: #00000050;
     border-radius: 5px;
