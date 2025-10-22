@@ -1,4 +1,5 @@
 import styles from "./AppointmentControlerModal.module.css"
+import Swal from "sweetalert2"
 
 export const AppointmentCancelModal = ({show, toggleCancelModal, appointmentId, refreshAppointments}) => {
   
@@ -11,16 +12,34 @@ export const AppointmentCancelModal = ({show, toggleCancelModal, appointmentId, 
       const data = await response.json()
 
       if (data.success) {
-        alert("El turno se marco como cancelado")
+        Swal.fire({
+          icon: 'success',
+          title: 'El turno a sido cancelado correctamente',
+          text: 'Verifica el calendario para confirmar la cancelacion',
+          confirmButtonColor: '#FF4ED2'
+        })
         toggleCancelModal()
         refreshAppointments()
-        window.location.reload();
+        setTimeout(() =>{
+          window.location.reload();
+        }, 1000)
 
       }else{
-        alert("El turno no pude se marcado como cancelado")
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al cancelar un turno',
+          text: 'Por favor refresque la pagina y vuelva a intentarlo',
+          confirmButtonColor: '#FF4ED2'
+        })
       }
       } catch (error) {
-        console.log("Hubo un error al conectar con el servidor", error)      
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al cancelar un turno',
+          text: 'Por favor refresque la pagina y vuelva a intentarlo',
+          confirmButtonColor: '#FF4ED2'
+        })
+        console.log("Hubo un error al conectar con el servidor", error)       
       }
   }
   

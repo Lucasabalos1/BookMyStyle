@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./Metrics.module.css";
 import {PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Swal from "sweetalert2";
+
 const GENDER_COLORS = {
   Masculino: "#3229e0", 
   Femenino: "#FF4ED2",  
@@ -13,10 +15,20 @@ export const MetricsClient = () => {
   const [clientsGenreData, setClientsGenreData] = useState([])
 
   const getClientsMetrics = async () => {
-    const response = await fetch('http://127.0.0.1:5000/metricas/clientes')
-    const data = await response.json()
-    console.log(data.data)
-    setClientsMetrics(data.data)
+    try {
+      const response = await fetch('http://127.0.0.1:5000/metricas/clientes')
+      const data = await response.json()
+      console.log(data.data)
+      setClientsMetrics(data.data)
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectar con el servicodor", error)
+    }
   }
 
   useEffect(() => {

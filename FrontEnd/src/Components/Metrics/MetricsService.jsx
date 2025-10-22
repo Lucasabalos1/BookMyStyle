@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Metrics.module.css";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Swal from "sweetalert2";
 
 export const MetricsService = () => {
   
@@ -9,10 +10,20 @@ export const MetricsService = () => {
   const [incomeServiceData , setIncomeServiceData] = useState([])
 
   const getServiceMetrics = async () => {
-    const response = await fetch('http://127.0.0.1:5000/metricas/servicios')
-    const data = await response.json()
-    console.log(data.data)
-    setServiceMetrics(data.data)
+    try {
+      const response = await fetch('http://127.0.0.1:5000/metricas/servicios')
+      const data = await response.json()
+      console.log(data.data)
+      setServiceMetrics(data.data)
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectar con el servicodor", error)
+    }
   }
 
   useEffect(() => {

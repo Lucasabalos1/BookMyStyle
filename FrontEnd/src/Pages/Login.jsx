@@ -62,6 +62,7 @@ export const Login = () => {
         text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
         confirmButtonColor: '#FF4ED2'
       })
+      console.log("Hubo un error al conectar con el servidor", error) 
     }
   }
 

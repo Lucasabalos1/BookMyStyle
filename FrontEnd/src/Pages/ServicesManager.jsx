@@ -3,6 +3,8 @@ import { Header } from "../Components/Global/Header"
 import { ServiceCard } from '../Components/GestionServicios/ServiceCard'
 import { AddServiceModal } from '../Components/GestionServicios/AddServiceModal'
 import { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
+
 export const ServicesManager = () => {
   
   const [serviceList, setServiceList] = useState([])
@@ -18,7 +20,13 @@ export const ServicesManager = () => {
         const data = await response.json()
         setServiceList(data.data)
     } catch (error) {
-        console.log("Hubo un error al conectarse con el servidor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectar con el servidor", error) 
     }
   }
   

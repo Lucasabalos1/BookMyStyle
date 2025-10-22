@@ -2,6 +2,7 @@ import styles from "./ClientCard.module.css"
 import { useState } from "react"
 import { DeleteClientModal } from "./DeleteClientModal"
 import { EditClientModal } from "./EditClientModal"
+import Swal from "sweetalert2"
 
 export const ClientCard = ({client, getClients}) => {
   
@@ -24,13 +25,28 @@ export const ClientCard = ({client, getClients}) => {
       const data = await response.json()
 
       if(data.success){
-        alert("Se elimino el cliente con exito")
+        Swal.fire({
+          icon: 'success',
+          title: 'El cliente se elimino correctamente',
+          confirmButtonColor: '#FF4ED2'
+        })
         toggleDeleteModal()
         getClients()
       }else{
-        alert("No se pudo eliminar el cliente")
+        Swal.fire({
+          icon: 'error',
+          title: 'No se pudo eliminar el cliente',
+          text: 'Refresca la pagina e intentelo de nuevo',
+          confirmButtonColor: '#FF4ED2'
+        })
       }
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
       console.log("Hubo un error al conectar con el servidor", error)
     }
   }

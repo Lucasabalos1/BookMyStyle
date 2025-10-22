@@ -3,6 +3,8 @@ import { Header } from "../Components/Global/Header"
 import { AppointmentCard } from '../Components/Appointment/AppointmentCard'
 import { AppointmentCalendar } from '../Components/Appointment/AppointmentCalendar'
 import { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
+
 export const AppointmentManager = () => {
   
   const [appointments, setAppointments] = useState([])
@@ -16,10 +18,20 @@ export const AppointmentManager = () => {
   const [handleData, setHandleData] = useState([])
 
   const getAppointments = async () => {
-    const response = await fetch("http://127.0.0.1:5000/getTurnos")
-    const data = await response.json()
+    try {
+      const response = await fetch("http://127.0.0.1:5000/getTurnos")
+      const data = await response.json()
 
-    setAppointments(data.data)
+      setAppointments(data.data)
+    } catch (error) {
+      console.log("Hubo un error en el servidor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+    }
   }
 
   const getData = async () => {
@@ -41,7 +53,13 @@ export const AppointmentManager = () => {
       setServiceList(dataService.data)
 
    }catch (error) {
-      console.log("Hubo un error al conectarse con el servidor", error)
+      console.log("Hubo un error en el servidor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
     }
   }
 

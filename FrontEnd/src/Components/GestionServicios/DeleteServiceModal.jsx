@@ -1,24 +1,40 @@
 import styles from "./DeleteServiceModal.module.css"
+import Swal from "sweetalert2"
 
 export const DeleteServiceModal = ({show, toggleDeleteModal, service,getServices}) => {
   
   const deleteService = async () => {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/deleteServices/${service.id}`,{
-            method: "DELETE"
+      const response = await fetch(`http://127.0.0.1:5000/deleteServices/${service.id}`,{
+          method: "DELETE"
+      })
+
+      const data = await response.json()
+
+      if(data.success){
+        Swal.fire({
+          icon: 'success',
+          title: 'Se elimino el servicio correctamente',
+          confirmButtonColor: '#FF4ED2'
         })
-
-        const data = await response.json()
-
-        if(data.success){
-            alert("Se Elimino el servicio correctamente")
-            toggleDeleteModal()
-            getServices()
-        }else{
-            alert("Hubo un error al eliminar el servicio ")
-        }  
+        toggleDeleteModal()
+        getServices()
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al eliminar el servicio',
+          text: 'Por favor, refresque la pagina e intentelo nuevamente',
+          confirmButtonColor: '#FF4ED2'
+        })
+      }  
     } catch (error) {
-        console.log("Hubo un error al conectarse con el servidor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectarse con el servidor", error)
     }
   }
 

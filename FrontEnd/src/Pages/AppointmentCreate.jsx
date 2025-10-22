@@ -1,8 +1,9 @@
 import styles from "./AppointmentCreate.module.css"
 import { Header } from "../Components/Global/Header"
 import { useEffect, useState } from "react"
+import Swal from "sweetalert2";
 
-const days = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado","Domingo"];
 
 export const AppointmentCreate = () => {
   
@@ -30,7 +31,6 @@ export const AppointmentCreate = () => {
     setTimeValue("")
     setServiceValue("")
     setClientValue("")
-    setEmployeeValue("")
     setNoteValue("")
   }
 
@@ -38,23 +38,38 @@ export const AppointmentCreate = () => {
       const schedule = JSON.parse(localStorage.getItem("schedule"))
 
       if (!schedule) {
-        alert("Todavia no se configuraron los dias y horarios, por favor dirigirse a configuracion de peluqueria")
+        Swal.fire({
+          icon: 'error',
+          title: 'Todavia no se configuraron los dias y horarios',
+          text: 'Por favor dirigirse a configuracion de peluqueria',
+          confirmButtonColor: '#FF4ED2'
+        })
         return false
       }
 
       const date = new Date(dateValue)
 
       const day = days[date.getDay()]
-
+      console.log(date.getDay())
+      console.log(day)
       const item = schedule.find(d => d.dia === day)
       
       if(!item.datos.estaAbierto){
-        alert(`El dia ${day} la peluqueria se encuentra cerrada`)
+        Swal.fire({
+          icon: 'error',
+          title: `El dia ${day} la peluqueria se encuentra cerrada.`,
+          confirmButtonColor: '#FF4ED2'
+        })
         return false;
       }
 
       if (timeValue < item.datos.Desde || timeValue > item.datos.Hasta) {
-        alert(`Se encuentra fuera de los limites de atencion, ingrese un valor entre las ${item.datos.Desde} y las ${item.datos.Hasta}`)
+        Swal.fire({
+          icon: 'error',
+          title: `Se encuentra fuera de los limites de atencion`,
+          text: `ingrese un valor entre las ${item.datos.Desde} y las ${item.datos.Hasta}`,
+          confirmButtonColor: '#FF4ED2'
+        })
         return false;
       }
 
@@ -88,14 +103,30 @@ export const AppointmentCreate = () => {
       const data = await response.json()
       
       if(data.success){
-        alert("Turno creado con exito")
+        Swal.fire({
+          icon: 'success',
+          title: `Turno creado con exito`,
+          text: `Por favor revise el calendario para confirma que el turno impacto en el sistema`,
+          confirmButtonColor: '#FF4ED2'
+        })
         clearInputs()
       }else{
-        alert("Error al crear el turno")
+        Swal.fire({
+          icon: 'error',
+          title: `Hubo un error al crear el turno`,
+          text: `Por favor revise los datos ingresado y asegurate que no haya un turno en este horario`,
+          confirmButtonColor: '#FF4ED2'
+        })
       }
 
     } catch (error) {
-      console.log("Hubo un error al conectar con el servidor", error)
+      console.log("Hubo un error en el servidor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
     }
   }
 
@@ -114,7 +145,13 @@ export const AppointmentCreate = () => {
 
       setServiceList(dataService.data)
    }catch (error) {
-      console.log("Hubo un error al conectarse con el servidor", error)
+      console.log("Hubo un error en el servidor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor al obtener los datos',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
     }   
   }
 

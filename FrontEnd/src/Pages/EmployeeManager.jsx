@@ -3,7 +3,7 @@ import { Header } from "../Components/Global/Header"
 import { EmployeeCard } from "../Components/GestionEmpleados/EmployeeCard"
 import { CreateEmployeeModal } from "../Components/GestionEmpleados/CreateEmployeeModal"
 import styles from "./EmployeeManager.module.css"
-
+import Swal from "sweetalert2"
 
 export const EmployeeManager = () => {
   
@@ -22,7 +22,13 @@ export const EmployeeManager = () => {
         setEmployees(data.data)
       }
     } catch (error) {
-      console.log("Error al conectar con el servidor", error)      
+     Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectar con el servidor", error) 
     }
   }
 

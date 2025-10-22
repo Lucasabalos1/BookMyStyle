@@ -1,6 +1,6 @@
 import styles from "./AppointmentEditModal.module.css";
 import { useState, useEffect } from "react";
-
+import Swal from "sweetalert2";
 
 export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refreshAppointments}) => {
   const [dateValue, setDateValue] = useState("");
@@ -57,16 +57,33 @@ export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refr
       const data = await response.json();
 
       if (data.success) {
-        alert("Turno editado con exito");
+        Swal.fire({
+          icon: 'success',
+          title: 'El turno fue editado correctamente',
+          confirmButtonColor: '#FF4ED2'
+        })
         clearInputs();
         refreshAppointments();
         toggleEditModal();
-        window.location.reload();
+        setTimeout(() =>{
+          window.location.reload();
+        }, 1000)
       } else {
-        alert("Error al editar el turno");
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al editar el turno',
+          text: 'Por favor, revise que ingreso los datos correctamente',
+          confirmButtonColor: '#FF4ED2'
+        })
       }
     } catch (error) {
-      console.log("Hubo un error al conectar con el servidor", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error por parte del servidor',
+          text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+          confirmButtonColor: '#FF4ED2'
+        })
+        console.log("Hubo un error al conectar con el servidor", error);
     }
   };
 
@@ -85,6 +102,12 @@ export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refr
 
       setServiceList(dataService.data);
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
       console.log("Hubo un error al conectarse con el servidor", error);
     }
   };

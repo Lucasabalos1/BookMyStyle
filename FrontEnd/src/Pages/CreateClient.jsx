@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Header } from "../Components/Global/Header"
 import styles from "./CreateClient.module.css"
+import Swal from "sweetalert2"
 
 export const CreateClient = () => {
 
@@ -35,16 +36,39 @@ export const CreateClient = () => {
 
       const data = await response.json()
 
-      //Cambiar esto por la libreria de notificaciones
+      
       if (data.success) {
-        alert("cliente creado con exito")
+        Swal.fire({
+          icon: 'success',
+          title: 'Cliente creado con exito',
+          confirmButtonColor: '#FF4ED2'
+      })
+      clearInputs()
       }else{
-        alert("Error al crear el cliente")
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al crear el cliente',
+          text: 'Por favor revisa los datos ingresados y verifica que el cliente ya no exista',
+          confirmButtonColor: '#FF4ED2'
+      })
       }
 
     } catch (error) {
-      console.error("Error al conectar con el servidor:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectar con el servidor", error) 
     }
+  }
+  
+  const clearInputs = () => {
+    setNameValue("")
+    setlastNameValue("")
+    setPhoneValue("")
+    setGenreValue("")
   }
 
   return (

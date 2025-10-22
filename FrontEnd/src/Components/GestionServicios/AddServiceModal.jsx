@@ -1,5 +1,6 @@
 import { useState } from "react"
 import styles from "./AddServiceModal.module.css"
+import Swal from "sweetalert2"
 
 export const AddServiceModal = ({show, toggleAddModal, getServices}) => {
   
@@ -41,15 +42,30 @@ export const AddServiceModal = ({show, toggleAddModal, getServices}) => {
       const data = await response.json()
 
       if (data.success) {
-        alert("El servicio se creo con exito")
+        Swal.fire({
+          icon: 'success',
+          title: 'El servicio se agrego correctamente',
+          confirmButtonColor: '#FF4ED2'
+        })
         toggleAddModal()
         getServices()
         clearInputs()
       }else{
-        alert("Hubo un error al crear el servicio")
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al crear el servicio',
+          text: 'Por favor, refresque la pagina e intentelo nuevamente',
+          confirmButtonColor: '#FF4ED2'
+        })
       }
     } catch (error) {
-        console.log("Hubo un error al conectar con el servicodor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectar con el servicodor", error)
     }
 
 

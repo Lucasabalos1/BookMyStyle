@@ -2,6 +2,8 @@ import styles from "./EmployeeCard.module.css"
 import { EditEmployeeModal } from "./EditEmployeeModal"
 import { useState } from "react"
 import { DeleteModal } from "./DeleteModal"
+import Swal from "sweetalert2"
+
 const userRolMap = {
     "user_admin": "Administrador",
     "user_empleado": "Empleado"
@@ -22,19 +24,34 @@ export const EmployeeCard = ({employee, getEmployee}) => {
 
   const deleteEmployee = async() => {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/eliminarEmpleado/${employee.id}`,{
-            method: "DELETE"
-        })
-        const data = await response.json()
+      const response = await fetch(`http://127.0.0.1:5000/eliminarEmpleado/${employee.id}`,{
+          method: "DELETE"
+      })
+      const data = await response.json()
 
-        if(data.success){
-            alert("Empleado eliminado con exito")
-            getEmployee()
-        }else{
-            alert("Error al tratar de eliminar al empleado")
-        }
+      if(data.success){
+        Swal.fire({
+          icon: 'success',
+          title: 'El empleado a sido eliminado con exito',
+          confirmButtonColor: '#FF4ED2'
+        })
+          getEmployee()
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al eliminar el empleado',
+          text: 'Por favor, refresque la pagina e intentelo nuevamente',
+          confirmButtonColor: '#FF4ED2'
+        })
+      }
     } catch (error) {
-        console.log("Hubo un error al conectar con el servidor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectar con el servidor", error)
     }
   }
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import styles from "./EditClientModal.module.css"
+import Swal from "sweetalert2"
 
 export const EditClientModal = ({show, toggleEditModal, client, getClients}) => {
   
@@ -37,7 +38,8 @@ export const EditClientModal = ({show, toggleEditModal, client, getClients}) => 
   const onSubmitClient = async (event) => {
     event.preventDefault()
 
-    const response = await fetch(`http://127.0.0.1:5000/editarCliente/${client.id}`,{
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/editarCliente/${client.id}`,{
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -48,18 +50,36 @@ export const EditClientModal = ({show, toggleEditModal, client, getClients}) => 
             telefono: phoneEditValue,
             genero: genreEditValue
         })
-    })
+      })
 
-    const data = await response.json()
+      const data = await response.json()
 
-    if(data.success){
-        alert("Se edito el cliente con exito")
+      if(data.success){
+        Swal.fire({
+          icon: 'success',
+          title: 'El cliente se edito correctamente',
+          confirmButtonColor: '#FF4ED2'
+        })
         toggleEditModal()
         getClients()
         clearInputs()
-    }else{
-        alert("No se pudo editar al cliente")
-    }
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'El cliente no pudo ser editado',
+          text: 'Por favor, refresque la pagina e intentelo de nuevo',
+          confirmButtonColor: '#FF4ED2'
+        })
+      }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error por parte del servidor',
+          text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+          confirmButtonColor: '#FF4ED2'
+        })
+        console.log("Hubo un error al conectar con el servidor", error) 
+      }
 
 
   }

@@ -1,5 +1,6 @@
 import styles from "./CreateEmployeeModal.module.css"
 import { useEffect, useState } from "react"
+import Swal from "sweetalert2"
 
 const userRolMap = {
     "Administrador": "user_admin",
@@ -44,7 +45,8 @@ export const EditEmployeeModal = ({show, toggleEditModal,employee, getEmployee})
   const onSubmitEmployee = async (event) => {
     event.preventDefault()
 
-    const response = await fetch(`http://127.0.0.1:5000/editarEmpleado/${employee.id}`, {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/editarEmpleado/${employee.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -56,19 +58,36 @@ export const EditEmployeeModal = ({show, toggleEditModal,employee, getEmployee})
           apellido: lastNameEditValue,
           rol: userRolMap[rolEditValue]
         })
-    })
+      })
 
-    const data = await response.json()
+      const data = await response.json()
 
-    //Cambiar por libreria de notificaciones
       if (data.success) {
-        alert("Empleado actualizado con exito")
+        Swal.fire({
+          icon: 'success',
+          title: 'El empleado se edito correctamente',
+          confirmButtonColor: '#FF4ED2'
+        })
         toggleEditModal()
         clearInputs()
         getEmployee()
       }else{
-        alert("Error al editar el Empleado")
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error al editar al empleado',
+          text: 'Por favor, refresque la pagina e intentelo de nuevo',
+          confirmButtonColor: '#FF4ED2'
+        })
       }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectar con el servidor", error) 
+    }
   }
 
   return (

@@ -1,5 +1,6 @@
 import styles from "./AddServiceModal.module.css"
 import { useEffect, useState } from "react"
+import Swal from "sweetalert2"
 
 export const EditServiceModal = ({show, toggleEditModal, service, getServices}) => {
     const [nameValue, setNameValue] = useState("")
@@ -46,15 +47,30 @@ export const EditServiceModal = ({show, toggleEditModal, service, getServices}) 
         const data = await response.json()
   
         if (data.success) {
-          alert("El servicio se edito con exito")
+          Swal.fire({
+            icon: 'success',
+            title: 'El servicio fue editado con exito',
+            confirmButtonColor: '#FF4ED2'
+          })
           toggleEditModal()
           getServices()
           clearInputs()
         }else{
-          alert("Hubo un error al editar el servicio")
+          Swal.fire({
+            icon: 'error',
+            title: 'Hubo un error al editar el servicio',
+            text: 'Por favor, refresque la pagina e intentelo nuevamente',
+            confirmButtonColor: '#FF4ED2'
+          })
         }
       } catch (error) {
-          console.log("Hubo un error al conectar con el servicodor", error)
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un error por parte del servidor',
+          text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+          confirmButtonColor: '#FF4ED2'
+        })
+        console.log("Hubo un error al conectar con el servicodor", error)
       }
     }
 

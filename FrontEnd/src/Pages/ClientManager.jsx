@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Header } from "../Components/Global/Header"
 import { ClientCard } from "../Components/GestionClientes/ClientCard"
 import styles from "./ClientManager.module.css"
+import Swal from "sweetalert2"
 
 export const ClientManager = () => {
   
@@ -15,7 +16,13 @@ export const ClientManager = () => {
         setClients(data.data)
       }
     } catch (error) {
-      console.log("Hubo un error al conectarse con el servidor", error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
+      console.log("Hubo un error al conectar con el servidor", error) 
     }
   }
 

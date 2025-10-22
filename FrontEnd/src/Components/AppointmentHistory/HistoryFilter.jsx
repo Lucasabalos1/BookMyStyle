@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import styles from "./HistoryFilter.module.css"
+import Swal from "sweetalert2"
 
 export const HistoryFilter = ({setClientInputSelected, setEmployeeInputSelected, setDateInputSelected}) => {
   
@@ -17,6 +18,12 @@ const fetchList = async (url, setter, errorMsg) => {
         alert(errorMsg)
       }
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Hubo un error por parte del servidor',
+        text: 'No te preocupes, no es tu culpa, vuelve a intentarlo en 1 minuto',
+        confirmButtonColor: '#FF4ED2'
+      })
       console.log("Hubo un error al conectar con el servidor", error)
     }
   }
