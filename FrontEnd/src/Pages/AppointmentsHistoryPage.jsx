@@ -54,7 +54,7 @@ export const AppointmentsHistoryPage = () => {
               ))
               : <h3 className={styles.noDataMsg}>No se encontraron turnos con ese filtro</h3>
               }
-</section>
+            </section>
         </div>
     </>
   )

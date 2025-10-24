@@ -135,6 +135,7 @@ export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refr
               id="date"
               value={dateValue}
               onChange={onInputChange}
+              required
             />
           </div>
 
@@ -148,6 +149,7 @@ export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refr
               max={"20:00"}
               value={timeValue}
               onChange={onInputChange}
+              required
             />
           </div>
 
@@ -158,6 +160,7 @@ export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refr
               id="service"
               value={serviceValue}
               onChange={onInputChange}
+              required
             >
               <option value="">Seleccione el servicio</option>
               {serviceList.map((service) => (
@@ -175,6 +178,7 @@ export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refr
               id="client"
               value={clientValue}
               onChange={onInputChange}
+              required
             >
               <option value="">Seleccione el cliente</option>
               {clientlist.map((client) => (
@@ -188,12 +192,12 @@ export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refr
 
           <div className={styles.blockContainer}>
             <label htmlFor="Employee">Empleado</label>
-            <input type="text" value={employeeValue.usuario} disabled={true} />
+            <input type="text" value={employeeValue.usuario} disabled={true} required/>
           </div>
 
           <div className={styles.blockContainer}>
             <label htmlFor="Employee">Estado</label>
-            <input type="text" value={"confirmado"} disabled={true} />
+            <input type="text" value={"confirmado"} disabled={true} required/>
           </div>
 
           <div className={`${styles.blockContainer} ${styles.note}`}>

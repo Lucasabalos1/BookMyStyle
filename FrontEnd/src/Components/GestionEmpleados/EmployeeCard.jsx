@@ -24,6 +24,19 @@ export const EmployeeCard = ({employee, getEmployee}) => {
 
   const deleteEmployee = async() => {
     try {
+      const user_actual = JSON.parse(localStorage.getItem("User_data"))
+
+      if(user_actual.id === employee.id){
+        Swal.fire({
+          icon: 'error',
+          title: 'No puedes eliminar al empleado actual',
+          confirmButtonColor: '#FF4ED2'
+        })
+        toggleDeleteModal()
+        return;
+      }
+      
+
       const response = await fetch(`http://127.0.0.1:5000/eliminarEmpleado/${employee.id}`,{
           method: "DELETE"
       })

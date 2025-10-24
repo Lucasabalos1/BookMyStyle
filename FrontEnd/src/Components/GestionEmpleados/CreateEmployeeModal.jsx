@@ -92,19 +92,19 @@ export const CreateEmployeeModal = ({show, toggleCreateModal, onEmployeeCreated}
                 <h2>Complete los datos para el nuevo empleado</h2>
 
                 <label htmlFor="correo">Email</label>
-                <input type="email" name="correo" id="correo" placeholder="Ingrese el correo del nuevo empleado" value={emailValue} onChange={onInputChange} />
+                <input type="email" name="correo" id="correo" placeholder="Ingrese el correo del nuevo empleado" value={emailValue} onChange={onInputChange} required/>
 
                 <label htmlFor="password">Contraseña</label>
-                <input type="password" name="password" id="password" placeholder="Ingrese la contraseña del nuevo empleado" value={passwordValue} onChange={onInputChange} />
+                <input type="password" name="password" id="password" placeholder="Ingrese la contraseña del nuevo empleado" value={passwordValue} onChange={onInputChange} required/>
 
                 <label htmlFor="name">Nombre</label>
-                <input type="text" name="name" id="name" placeholder="Ingrese el nombre del nuevo empleado" value={nameValue} onChange={onInputChange}/>
+                <input type="text" name="name" id="name" placeholder="Ingrese el nombre del nuevo empleado" value={nameValue} onChange={onInputChange} required/>
 
                 <label htmlFor="lastName">Apellido</label>
-                <input type="text" name="lastName" id="lastName" placeholder="Ingrese el apellido del nuevo empleado" value={lastNameValue} onChange={onInputChange}/>
+                <input type="text" name="lastName" id="lastName" placeholder="Ingrese el apellido del nuevo empleado" value={lastNameValue} onChange={onInputChange} required/>
                 
                 <label htmlFor="rol">Rol</label>
-                <select name="rol" id="rol" value={rolValue} onChange={onInputChange}>
+                <select name="rol" id="rol" value={rolValue} onChange={onInputChange} required>
                     <option value="">Selecciona un rol para el empleado</option>
                     <option value="Administrador">Administrador</option>
                     <option value="Empleado">Empleado</option>

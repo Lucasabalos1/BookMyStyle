@@ -95,16 +95,16 @@ export const EditClientModal = ({show, toggleEditModal, client, getClients}) => 
                 <h2>Complete los datos para editar al cliente</h2>
             
                 <label htmlFor="name">Nombre</label>
-                <input type="text" name="name"  placeholder="Ingrese el nombre del nuevo cliente" value={nameEditValue} onChange={onInputChange}/>
+                <input type="text" name="name"  placeholder="Ingrese el nombre del nuevo cliente" value={nameEditValue} onChange={onInputChange} required/>
             
                 <label htmlFor="lastName">Apellido</label>
-                <input type="text" name="lastName"  placeholder="Ingrese el apellido del nuevo cliente" value={lastNameEditValue} onChange={onInputChange}/>
+                <input type="text" name="lastName"  placeholder="Ingrese el apellido del nuevo cliente" value={lastNameEditValue} onChange={onInputChange} required/>
 
                 <label htmlFor="phone">Telefono</label>
-                <input type="text" name="phone"  placeholder="Ingrese el telefono del nuevo cliente" value={phoneEditValue} onChange={onInputChange}/>
+                <input type="text" name="phone"  placeholder="Ingrese el telefono del nuevo cliente" value={phoneEditValue} onChange={onInputChange} required/>
 
                 <label htmlFor="genero">Rol</label>
-                <select name="genero"  value={genreEditValue} onChange={onInputChange}>
+                <select name="genero"  value={genreEditValue} onChange={onInputChange} required>
                     <option value="">Selecciona un genero para el cliente</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>

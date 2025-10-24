@@ -169,17 +169,17 @@ export const AppointmentCreate = () => {
           <form onSubmit={onSubmitAppointment}>
             <div className={styles.blockContainer}>
               <label htmlFor="date">Fecha</label>
-              <input type="date" name="date" id="date" value={dateValue} onChange={onInputChange}/>
+              <input type="date" name="date" id="date" value={dateValue} onChange={onInputChange} required/>
             </div>
 
             <div className={styles.blockContainer}>
               <label htmlFor="time">Hora</label>
-              <input type="time" name="time" id="time" min={"9:00"} max={"23:30"} value={timeValue} onChange={onInputChange}/>
+              <input type="time" name="time" id="time" min={"9:00"} max={"23:30"} value={timeValue} onChange={onInputChange} required/>
             </div>
 
             <div className={styles.blockContainer}>
               <label htmlFor="service">Servicio</label>
-              <select name="service" id="service" value={serviceValue} onChange={onInputChange}>
+              <select name="service" id="service" value={serviceValue} onChange={onInputChange} required>
                 <option value="">Seleccione el servicio</option>
                 {serviceList.map((service) => (
                   <option key={service.id} value={service.id}>{service.nombre}</option>
@@ -189,7 +189,7 @@ export const AppointmentCreate = () => {
 
             <div className={styles.blockContainer}>
                 <label htmlFor="client">Cliente</label>
-              <select name="client" id="client" value={clientValue} onChange={onInputChange}>
+              <select name="client" id="client" value={clientValue} onChange={onInputChange} required>
                 <option value="">Seleccione el cliente</option>
                 {clientlist.map((client) => (
                   <option key={client.id} value={client.id}>{`${client.nombre} ${client.apellido}`}</option>
@@ -199,13 +199,13 @@ export const AppointmentCreate = () => {
 
             <div className={styles.blockContainer}>
               <label htmlFor="Employee">Empleado</label>
-              <input type="text" value={employeeValue.usuario} disabled={true}/>
+              <input type="text" value={employeeValue.usuario} disabled={true} required/>
             </div>
 
             
             <div className={styles.blockContainer}>
               <label htmlFor="Employee">Estado</label>
-              <input type="text" value={"confirmado"} disabled={true}/>
+              <input type="text" value={"confirmado"} disabled={true} required/>
             </div>
 
             

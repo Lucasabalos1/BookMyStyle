@@ -94,13 +94,13 @@ export const EditServiceModal = ({show, toggleEditModal, service, getServices}) 
                   </div>
   
                   <label htmlFor="nombre">Nombre</label>
-                  <input type="text" name="nombre" id="nombre" placeholder="Ingrese un nombre para el nuevo servicio" value={nameValue} onChange={onInputChange}/>
+                  <input type="text" name="nombre" id="nombre" placeholder="Ingrese un nombre para el nuevo servicio" value={nameValue} onChange={onInputChange} required/>
   
                   <label htmlFor="tiempo">Tiempo</label>
-                  <input type="text" name="tiempo" id="tiempo" placeholder="Ingrese el tiempo del nuevo servicio" value={timeValue} onChange={onInputChange}/>
+                  <input type="text" name="tiempo" id="tiempo" placeholder="Ingrese el tiempo del nuevo servicio" value={timeValue} onChange={onInputChange} required/>
   
                   <label htmlFor="precio">Precio</label>
-                  <input type="text" name="precio" id="precio" placeholder="Ingrese un precio para el nuevo servicio" value={priceValue} onChange={onInputChange}/>
+                  <input type="text" name="precio" id="precio" placeholder="Ingrese un precio para el nuevo servicio" value={priceValue} onChange={onInputChange} required/>
   
                   <button className={styles.confirmService}>Cargar Servicio</button>
               </form>
