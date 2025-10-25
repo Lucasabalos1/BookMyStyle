@@ -15,11 +15,11 @@ export const Header = () => {
   }
 
   const toggleMenu = () => {
-    setShowLogoutMenu(!showLogoutMenu)
+    setShowLogoutMenu(prev => !prev)
   }
 
   const toggleNavbar = () => {
-    setShowNavbar(!showNavbar)
+    setShowNavbar(prev => !prev)
   }
 
   return (

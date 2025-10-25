@@ -15,11 +15,11 @@ export const EmployeeCard = ({employee, getEmployee}) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
 
   const toggleEditModal = () => {
-    setShowEditModal(!showEditModal)
+    setShowEditModal(prev => !prev)
   }
 
   const toggleDeleteModal = () => {
-    setShowDeleteModal(!showDeleteModal)
+    setShowDeleteModal(prev => !prev)
   }
 
   const deleteEmployee = async() => {
@@ -28,7 +28,7 @@ export const EmployeeCard = ({employee, getEmployee}) => {
 
       if(user_actual.id === employee.id){
         Swal.fire({
-          icon: 'error',
+          icon: 'warning',
           title: 'No puedes eliminar al empleado actual',
           confirmButtonColor: '#FF4ED2'
         })

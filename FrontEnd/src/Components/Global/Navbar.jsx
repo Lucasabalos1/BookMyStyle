@@ -1,8 +1,26 @@
 import styles from './Navbar.module.css'
 import logo from '../../assets/BookmystyleLogoInverso.png';
 import { NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 export const Navbar = ({show, toggleNavbar}) => {
+  
+  const [isVisible, setIsVisible] = useState(true)
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("User_data"))
+
+    if(!user){
+        return;
+    }
+
+    if (user.rol != "user_admin") {
+        setIsVisible(false)
+    }
+
+
+  })
+
   return (
     <>
 
@@ -36,7 +54,7 @@ export const Navbar = ({show, toggleNavbar}) => {
                         </div>
                     </div>
 
-                    <div className={styles.sectionContainer}>
+                    <div className={`${isVisible ? styles.sectionContainer : styles.hideNav}`}>
                         <h2 className={styles.sectionTitle}>Empleados</h2>
                         <div className={styles.sectionNavListContainer}>
                             <div className={styles.sectionNavContainer}>
@@ -96,7 +114,7 @@ export const Navbar = ({show, toggleNavbar}) => {
                         </div>
                     </div>
 
-                    <div className={styles.sectionContainer}>
+                    <div className={`${isVisible ? styles.sectionContainer : styles.hideNav}`}>
                         <h2 className={styles.sectionTitle}>Configuracion</h2>
                         <div className={styles.sectionNavListContainer}>
                             <div className={styles.sectionNavContainer}>

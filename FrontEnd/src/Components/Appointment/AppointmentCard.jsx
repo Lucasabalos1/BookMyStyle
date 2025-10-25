@@ -11,15 +11,15 @@ export const AppointmentCard = ({show, handleData, toggleModalCard, refreshAppoi
   const [showEditModal, setShowEditModal] = useState(false)
 
   const toggleConfirmModal = () =>{
-    setShowConfirmModal(!showConfirmModal)
+    setShowConfirmModal(prev => !prev)
   }
 
   const toggleCancelModal = () =>{ 
-    setShowCancelModal(!showCancelModal)
+    setShowCancelModal(prev => !prev)
   }
 
   const toggleEditModal = () =>{ 
-    setShowEditModal(!showEditModal)
+    setShowEditModal(prev => !prev)
   }
   return (
     <>

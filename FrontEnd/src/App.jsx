@@ -12,6 +12,7 @@ import { ServicesManager } from './Pages/ServicesManager';
 import { AppointmentsHistoryPage } from './Pages/AppointmentsHistoryPage';
 import { WorkHoursManager } from './Pages/WorkHoursManager';
 import { MetricsPage } from './Pages/MetricsPage';
+import { NotFound } from './Components/Global/NotFound';
 
 export const App = () => {
   return (
@@ -29,6 +30,7 @@ export const App = () => {
         <Route path='/workManager' element={<PrivateRoute role={'user_admin'}><WorkHoursManager /></PrivateRoute>} />
         <Route path='/metricsPage' element={<PrivateRoute role={['user_admin', 'user_empleado']}><MetricsPage/></PrivateRoute>}/>
         <Route path='/' element={<Navigate to="/login" />}/>
+        <Route path='/404Screen' element={<NotFound/>}/>
       </Routes>
     </>
   )

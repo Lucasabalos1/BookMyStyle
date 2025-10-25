@@ -11,7 +11,7 @@ export const EmployeeManager = () => {
   const [showCreateModal, setshowCreateModal] = useState(false)
 
   const toggleCreateModal = () => {
-    setshowCreateModal(!showCreateModal)
+    setshowCreateModal(prev => !prev)
   }
 
   const getEmployee = async () => {

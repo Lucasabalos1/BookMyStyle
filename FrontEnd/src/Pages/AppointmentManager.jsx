@@ -108,7 +108,7 @@ export const AppointmentManager = () => {
   };
 
   const toggleModalCard = () => {
-    setShowCard(!showCard)
+    setShowCard(prev => !prev)
   }
 
   const handleEventClick = (clickInfo) => {

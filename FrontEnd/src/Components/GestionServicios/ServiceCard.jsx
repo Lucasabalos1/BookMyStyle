@@ -10,11 +10,11 @@ export const ServiceCard = ({service, getServices}) => {
 
 
   const toggleEditModal = () => {
-    setShowEditModal(!showEditModal)
+    setShowEditModal(prev => !prev)
   }
 
   const toggleDeleteModal = () => {
-    setShowDeleteModal(!showDeleteModal)
+    setShowDeleteModal(prev => !prev)
   }
 
 

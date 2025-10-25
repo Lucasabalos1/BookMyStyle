@@ -7,6 +7,10 @@ export const HistoryFilter = ({setClientInputSelected, setEmployeeInputSelected,
   const [clientList, setClientList] = useState([])
   const [employeeList, setEmployeeList] = useState([])
 
+  const [clientValue, setClientValue] = useState("")
+  const [employeeValue, setEmployeeValue] = useState("")
+  const [dataValue, setDataValue] = useState("")
+
 
 const fetchList = async (url, setter, errorMsg) => {
   try {
@@ -15,7 +19,11 @@ const fetchList = async (url, setter, errorMsg) => {
       if (data.success) {
         setter(data.data)
       } else {
-        alert(errorMsg)
+        Swal.fire({
+          icon: 'error',
+          title: `${errorMsg}`,
+          confirmButtonColor: '#FF4ED2'
+        })
       }
     } catch (error) {
       Swal.fire({
@@ -29,12 +37,24 @@ const fetchList = async (url, setter, errorMsg) => {
   }
 
   const onInputChange = (event) => {
-    (event.target.name === "cliente") ? setClientInputSelected(event.target.value) :
-    (event.target.name === "empleado") ? setEmployeeInputSelected(event.target.value) :
-    (event.target.name === "fecha") ? setDateInputSelected(event.target.value) : ""
+    if (event.target.name === "cliente") {
+      setClientValue(event.target.value)
+      setClientInputSelected(event.target.value)
+    }
+    if (event.target.name === "empleado") {
+      setEmployeeValue(event.target.value)
+      setEmployeeInputSelected(event.target.value)
+    }
+    if (event.target.name === "fecha") {
+      setDataValue(event.target.value)
+      setDateInputSelected(event.target.value)
+    }
   }
 
   const clearFilters = () => {
+    setClientValue("")
+    setEmployeeValue("")
+    setDataValue("")
     setClientInputSelected("")
     setEmployeeInputSelected("")
     setDateInputSelected("")
@@ -52,7 +72,7 @@ const fetchList = async (url, setter, errorMsg) => {
         <div className={styles.inputsContainer}>
             <div className={styles.inputBlock}>
                 <label htmlFor="cliente">Cliente</label>
-                <select name="cliente" id="cliente" onChange={onInputChange}>
+                <select name="cliente" id="cliente" onChange={onInputChange} value={clientValue}>
                     <option value="">Seleccione el cliente</option>
                     {clientList.map((client) => (
                       <option key={client.id} value={client.id}>{`${client.nombre} ${client.apellido}`}</option>
@@ -61,7 +81,7 @@ const fetchList = async (url, setter, errorMsg) => {
             </div>
             <div className={styles.inputBlock}>
                 <label htmlFor="empleado">Empleado</label>
-                <select name="empleado" id="empleado" onChange={onInputChange}>
+                <select name="empleado" id="empleado" onChange={onInputChange} value={employeeValue}>
                     <option value="">Seleccione el empleado</option>
                     {employeeList.map((employee) => (
                       <option key={employee.id} value={employee.id}>{`${employee.nombre} ${employee.apellido}`}</option>
@@ -70,7 +90,7 @@ const fetchList = async (url, setter, errorMsg) => {
             </div>
             <div className={styles.inputBlock}>
                 <label htmlFor="fecha">Fecha</label>
-                <input type="date" placeholder="Seleccione una fecha" onChange={onInputChange}/>
+                <input type="date" name="fecha" placeholder="Seleccione una fecha" onChange={onInputChange} value={dataValue}/>
             </div>
         </div>
         <div className={styles.clearBtnContainer}>

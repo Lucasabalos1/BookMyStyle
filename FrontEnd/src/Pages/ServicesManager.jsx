@@ -11,7 +11,7 @@ export const ServicesManager = () => {
   const [showAddModal, setShowAddModal] = useState(false)
 
   const toggleAddModal = () => {
-    setShowAddModal(!showAddModal)
+    setShowAddModal(prev => !prev)
   }
 
   const getServices = async () => {

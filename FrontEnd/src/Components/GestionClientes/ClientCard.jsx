@@ -10,11 +10,11 @@ export const ClientCard = ({client, getClients}) => {
   const [showEditModal, setShowEditModal] = useState(false)
   
   const toggleDeleteModal = () => {
-    setShowDeleteModal(!showDeleteModal)
+    setShowDeleteModal(prev => !prev)
   }
 
   const toggleEditModal = () =>{
-    setShowEditModal(!showEditModal)
+    setShowEditModal(prev => !prev)
   }
 
   const deleteClient = async () => {
