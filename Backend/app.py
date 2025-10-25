@@ -520,8 +520,8 @@ def delete_services(id):
 
 @app.route("/turnos/historial", methods=["GET"])
 def historial_turnos():
-    empleado_id = request.args.get("empleado", type=int)
-    cliente_id = request.args.get("cliente", type=int)
+    empleado_id = request.args.get("empleado", type=int)  # Cambiado de empleado_id a empleado
+    cliente_id = request.args.get("cliente", type=int)    # Cambiado de cliente_id a cliente  
     fecha = request.args.get("fecha")
 
     query = Turno.query.filter(Turno.state == EstadoTurno.COMPLETADO)
@@ -532,8 +532,8 @@ def historial_turnos():
         query = query.filter(Turno.cliente_id == cliente_id)
     if fecha:
         try:
-            fecha = datetime.strptime(fecha, "%Y-%m-%d").date()
-            query = query.filter(Turno.date == fecha)
+            fecha_obj = datetime.datetime.strptime(fecha, "%Y-%m-%d").date()
+            query = query.filter(Turno.date == fecha_obj)
         except ValueError:
             return jsonify({"success": False, "message": "Formato de fecha inválido. Use YYYY-MM-DD"}), 400
 
