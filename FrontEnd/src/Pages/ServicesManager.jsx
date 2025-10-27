@@ -4,6 +4,7 @@ import { ServiceCard } from '../Components/GestionServicios/ServiceCard'
 import { AddServiceModal } from '../Components/GestionServicios/AddServiceModal'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
+import { Footer } from '../Components/Global/Footer'
 
 export const ServicesManager = () => {
   
@@ -63,7 +64,7 @@ export const ServicesManager = () => {
       </section>
       
       <AddServiceModal show={showAddModal} toggleAddModal={toggleAddModal} getServices={getServices}/>
-
+      <Footer />
     </>
   )
 }

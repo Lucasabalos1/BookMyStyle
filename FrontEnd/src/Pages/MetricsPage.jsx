@@ -5,6 +5,7 @@ import { MetricsClient } from "../Components/Metrics/MetricsClient"
 import { MetricsEmployeer } from "../Components/Metrics/MetricsEmployeer"
 import { MetricsIncome } from "../Components/Metrics/MetricsIncome"
 import { MetricsService } from "../Components/Metrics/MetricsService"
+import { Footer } from "../Components/Global/Footer"
 
 const metricsComponents = {
   clientes: <MetricsClient />,
@@ -47,6 +48,7 @@ export const MetricsPage = () => {
         </section>
 
       </div>
+      <Footer />
     </>
   )
 }

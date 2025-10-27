@@ -2,6 +2,7 @@ import styles from "./WorkHoursManager.module.css"
 import { Header } from "../Components/Global/Header"
 import { DayCard } from "../Components/WorkMangar/DayCard"
 import { useEffect, useRef, useState, } from "react"
+import { Footer } from "../Components/Global/Footer"
 
 
 export const WorkHoursManager = () => {
@@ -61,6 +62,7 @@ export const WorkHoursManager = () => {
           ? { ...item, datos: { ...item.datos, estaAbierto: !item.datos.estaAbierto } }
           : item
       );
+      setIsChange(true)
       return updated;
     });
   }
@@ -72,6 +74,7 @@ export const WorkHoursManager = () => {
           ? { ...item, datos: { ...item.datos, [field]: value } }
           : item
       );
+      setIsChange(true)
       return updated;
     });
   };
@@ -85,13 +88,13 @@ export const WorkHoursManager = () => {
     getSchedules()
   },[])
 
-  useEffect(() => {
-    if (firstLoad.current) {
-      firstLoad.current = false;
-    } else {
-      setIsChange(true);
-    }
-  }, [schedule]);
+  // useEffect(() => {
+  //   if (firstLoad.current) {
+  //     firstLoad.current = false;
+  //   } else {
+  //     setIsChange(true);
+  //   }
+  // }, [schedule]);
 
 
   return (
@@ -128,6 +131,7 @@ export const WorkHoursManager = () => {
             </div>
         </section>
       </div>
+      <Footer />
     </>
   )
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Header } from "../Components/Global/Header"
 import { ClientCard } from "../Components/GestionClientes/ClientCard"
 import styles from "./ClientManager.module.css"
+import { Footer } from '../Components/Global/Footer'
 import Swal from "sweetalert2"
 
 export const ClientManager = () => {
@@ -43,6 +44,7 @@ export const ClientManager = () => {
         ))}
       </section>
     </div>
+    <Footer />
 
     </>
   )

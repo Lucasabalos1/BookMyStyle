@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Header } from "../Components/Global/Header"
 import styles from "./CreateClient.module.css"
 import Swal from "sweetalert2"
+import { Footer } from "../Components/Global/Footer"
 
 export const CreateClient = () => {
 
@@ -100,6 +101,7 @@ export const CreateClient = () => {
           </form>
         </section>
       </div>
+      <Footer />
     </>
   )
 }

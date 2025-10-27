@@ -4,6 +4,7 @@ import { EmployeeCard } from "../Components/GestionEmpleados/EmployeeCard"
 import { CreateEmployeeModal } from "../Components/GestionEmpleados/CreateEmployeeModal"
 import styles from "./EmployeeManager.module.css"
 import Swal from "sweetalert2"
+import { Footer } from "../Components/Global/Footer"
 
 export const EmployeeManager = () => {
   
@@ -54,6 +55,7 @@ export const EmployeeManager = () => {
 
         <CreateEmployeeModal show={showCreateModal} toggleCreateModal={toggleCreateModal} onEmployeeCreated={getEmployee}/>
       </div>
+      <Footer />
     </>
   )
 }

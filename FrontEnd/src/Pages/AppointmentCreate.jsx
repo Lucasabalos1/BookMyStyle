@@ -1,5 +1,6 @@
 import styles from "./AppointmentCreate.module.css"
 import { Header } from "../Components/Global/Header"
+import { Footer } from "../Components/Global/Footer"
 import { useEffect, useState } from "react"
 import Swal from "sweetalert2";
 
@@ -224,7 +225,7 @@ export const AppointmentCreate = () => {
           </form>
         </section>
       </div>
-
+      <Footer />
     </>
   )
 }

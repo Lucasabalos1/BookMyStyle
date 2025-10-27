@@ -1,0 +1,69 @@
+.cardContainer{
+    width: min(90%, 400px);
+    max-width: 500px;
+    height: 250px;
+    margin: 0 auto;
+    padding: 18px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #201C3A 0%, #2A254A 100%);
+    box-shadow: 0 8px 24px rgba(15,12,30,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #F6F4FF;
+}
+
+.cardTitle{
+    text-align: center;
+    font-size: 1.35rem;
+    color: #FFFFFF;
+    font-weight: 700;
+    padding: 6px 0;
+    letter-spacing: 0.2px;
+}
+
+.subtitlesContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 6px 4px 2px 4px;
+}
+
+.subtitleCont{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.03);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #E6E0FF !important;
+    margin: 0;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+    cursor: default;
+    text-decoration: none;
+}
+
+.subtitleCont > a{
+    display: block;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+}
+.subtitleCont::before{
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #7C5FFF;
+    box-shadow: 0 0 8px rgba(124,95,255,0.25);
+}
+
+.hideCard{
+    display: none;
+}

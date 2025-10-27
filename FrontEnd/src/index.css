@@ -22,27 +22,29 @@ body{
     100% { background-position: 0% 50%; }
 }
 
+body::-webkit-scrollbar {
+    width: 8px;
+    background: #121212;
+}
+body::-webkit-scrollbar-thumb {
+    background: #FF4ED2;
+    border-radius: 4px;
+}
 
 .titleSection {
-    /* Tipografía */
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.5rem; /* Más impacto */
-    font-weight: 900; /* Más audaz */
+    font-size: 1.5rem; 
+    font-weight: 900; 
     text-align: center;
     letter-spacing: 2px;
     margin: 30px 0 20px 0;
-    
-    /* Gradiente como Relleno (Se mantiene el estilo del diseño original) */
     background: linear-gradient(90deg, #7C5CFA 0%, #FF4ED2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    
-    /* Sombra de Brillo (Efecto Neón) - ¡El elemento clave! */
-    /* Usa los colores del gradiente para crear un resplandor elegante */
     text-shadow: 
-        0 0 4px rgba(255, 78, 210, 0.5), /* Sombra interior suave (Rosa) */
-        0 0 10px rgba(124, 92, 250, 0.4), /* Sombra exterior media (Violeta) */
-        0 0 20px rgba(124, 92, 250, 0.2); /* Sombra exterior grande y difusa (Violeta) */
+        0 0 4px rgba(255, 78, 210, 0.5),
+        0 0 10px rgba(124, 92, 250, 0.4),
+        0 0 20px rgba(124, 92, 250, 0.2); 
 }
 
 @media (min-width: 900px) {

@@ -3,6 +3,7 @@ import { Header } from "../Components/Global/Header"
 import { HistoryFilter } from "../Components/AppointmentHistory/HistoryFilter"
 import { HistoryCard } from "../Components/AppointmentHistory/HistoryCard"
 import { useEffect, useState } from "react"
+import { Footer } from '../Components/Global/Footer'
 import Swal from "sweetalert2"
 
 export const AppointmentsHistoryPage = () => {
@@ -56,6 +57,7 @@ export const AppointmentsHistoryPage = () => {
               }
             </section>
         </div>
+        <Footer />
     </>
   )
 }

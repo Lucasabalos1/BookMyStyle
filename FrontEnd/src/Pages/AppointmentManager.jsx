@@ -4,6 +4,7 @@ import { AppointmentCard } from '../Components/Appointment/AppointmentCard'
 import { AppointmentCalendar } from '../Components/Appointment/AppointmentCalendar'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
+import { Footer } from '../Components/Global/Footer'
 
 export const AppointmentManager = () => {
   
@@ -152,7 +153,7 @@ export const AppointmentManager = () => {
         />        
       </div>
       <AppointmentCard show={showCard} handleData={handleData} toggleModalCard={toggleModalCard} refreshAppointments={refreshAppointments}/>
-
+      <Footer />
     </>
   )
 }
