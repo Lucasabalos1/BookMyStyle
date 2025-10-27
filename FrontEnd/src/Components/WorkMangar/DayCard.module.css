@@ -12,7 +12,16 @@
     border-radius: 5px;
 }
 
+.dayContainer{
+    width: 20%;
+}
 
+.controlersContainer{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .inputsContainer{
     display: grid;
