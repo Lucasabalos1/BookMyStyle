@@ -453,7 +453,7 @@ def add_services():
 
     try:
         time = int(time)
-        price = Decimal(price).quantize(Decimal("0.01"))  # fuerza 2 decimales
+        price = Decimal(price).quantize(Decimal("0.01"))
     except:
         return jsonify({"success": False, "message": "Tiempo o precio inválido"}), 400
     
@@ -479,7 +479,7 @@ def edit_services(id):
     
     try:
         time = int(time)
-        price = Decimal(price).quantize(Decimal("0.01"))  # fuerza 2 decimales
+        price = Decimal(price).quantize(Decimal("0.01"))
     except:
         return jsonify({"success": False, "message": "Tiempo o precio inválido"}), 400
     
@@ -519,9 +519,9 @@ def delete_services(id):
     return jsonify({"success": True, "message": "El servicio se elimino correctamente"}),200
 
 @app.route("/turnos/historial", methods=["GET"])
-def historial_turnos():
-    empleado_id = request.args.get("empleado", type=int)  # Cambiado de empleado_id a empleado
-    cliente_id = request.args.get("cliente", type=int)    # Cambiado de cliente_id a cliente  
+def historial_turnos():#
+    empleado_id = request.args.get("empleado", type=int)
+    cliente_id = request.args.get("cliente", type=int)
     fecha = request.args.get("fecha")
 
     query = Turno.query.filter(Turno.state == EstadoTurno.COMPLETADO)
@@ -565,21 +565,6 @@ def historial_turnos():
     
     return jsonify({"success": True, "data": turnosList}),200
 
-
-# def calcularPromedioPorEmpleado(turnos):
-#     hoy = datetime.datetime.now()
-#     mes_actual = hoy.month
-#     anio_actual = hoy.year
-    
-#     turnos_mes_actual = [
-#         turno for turno in turnos
-#         if turno.date.month == mes_actual and turno.date.year == anio_actual
-#     ]
-    
-#     pormedio = len(turnos_mes_actual) / 4
-    
-#     return round(pormedio, 2)
-
 def calcularIngresosPorEmpleado(turnos):
     ingresos = 0
     
@@ -597,7 +582,6 @@ def obtenerDatosEmpleados(empleado):
         "nombre": empleado.name,
         "turnos": len(cantidad_turnos),
         "ingresos": ingresos_del_empleado,
-        # "promedio_turnos_por_semana": calcularPromedioPorEmpleado(cantidad_turnos)
     }
     
     return worker
@@ -693,7 +677,6 @@ def getMetricasIngresos():
         "porcetaje_diferencia": obtenerPorcentaje(ingresos_mes_anterior,ingresos_mes_actual)
     }
 
-    # Ingresos por día de la semana como lista de objetos
     dias_orden = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     ingresos_por_dia_dict = {dia: 0 for dia in dias_orden}
     dias_trad = {
