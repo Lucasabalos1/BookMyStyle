@@ -629,6 +629,7 @@ def getMetricasClientes():
         top_clients.append(datos_cliente)
         
     top_clients.sort(key=lambda c: c["cantidad_de_atenciones"], reverse=True)
+    top_clients = top_clients[:5]
     
     clients = {
         "top_clientes": top_clients,
