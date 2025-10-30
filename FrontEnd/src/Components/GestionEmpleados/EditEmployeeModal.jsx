@@ -104,13 +104,13 @@ export const EditEmployeeModal = ({show, toggleEditModal,employee, getEmployee})
                 <input type="email" name="correoEdit"  placeholder="Ingrese el correo del nuevo empleado" value={emailEditValue} onChange={onInputChange} required />
       
                 <label htmlFor="passwordEdit">Contraseña</label>
-                <input type="password" name="passwordEdit"  placeholder="Ingrese la contraseña del nuevo empleado" value={passwordEditValue} onChange={onInputChange} required />
+                <input type="password" name="passwordEdit"  placeholder="Ingrese la contraseña del nuevo empleado" value={passwordEditValue} onChange={onInputChange} minLength={3} maxLength={32} required />
       
                 <label htmlFor="nameEdit">Nombre</label>
-                <input type="text" name="nameEdit"  placeholder="Ingrese el nombre del nuevo empleado" value={nameEditValue} onChange={onInputChange} required/>
+                <input type="text" name="nameEdit"  placeholder="Ingrese el nombre del nuevo empleado" value={nameEditValue} onChange={onInputChange} minLength={3} maxLength={32} required/>
       
                 <label htmlFor="lastNameEdit">Apellido</label>
-                <input type="text" name="lastNameEdit"  placeholder="Ingrese el apellido del nuevo empleado" value={lastNameEditValue} onChange={onInputChange} required/>
+                <input type="text" name="lastNameEdit"  placeholder="Ingrese el apellido del nuevo empleado" value={lastNameEditValue} onChange={onInputChange} minLength={3} maxLength={32} required/>
                       
                 <label htmlFor="rolEdit">Rol</label>
                 <select name="rolEdit"  value={rolEditValue} onChange={onInputChange} required>

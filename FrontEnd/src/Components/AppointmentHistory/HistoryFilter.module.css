@@ -4,7 +4,6 @@
     border-radius: 5px;
     border: 1px solid #fff;
     padding: 10px;
-    /* backdrop-filter: blur(6px); Solo desenfoca el fondo */
 }
 
 .filterTitle{

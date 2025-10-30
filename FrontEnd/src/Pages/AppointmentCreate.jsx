@@ -175,7 +175,7 @@ export const AppointmentCreate = () => {
 
             <div className={styles.blockContainer}>
               <label htmlFor="time">Hora</label>
-              <input type="time" name="time" id="time" min={"9:00"} max={"23:30"} value={timeValue} onChange={onInputChange} required/>
+              <input type="time" name="time" id="time" value={timeValue} onChange={onInputChange} required/>
             </div>
 
             <div className={styles.blockContainer}>

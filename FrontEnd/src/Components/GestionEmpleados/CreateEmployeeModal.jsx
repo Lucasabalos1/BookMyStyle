@@ -95,13 +95,13 @@ export const CreateEmployeeModal = ({show, toggleCreateModal, onEmployeeCreated}
                 <input type="email" name="correo" id="correo" placeholder="Ingrese el correo del nuevo empleado" value={emailValue} onChange={onInputChange} required/>
 
                 <label htmlFor="password">Contraseña</label>
-                <input type="password" name="password" id="password" placeholder="Ingrese la contraseña del nuevo empleado" value={passwordValue} onChange={onInputChange} required/>
+                <input type="password" name="password" id="password" placeholder="Ingrese la contraseña del nuevo empleado" value={passwordValue} onChange={onInputChange} minLength={3} maxLength={32} required/>
 
                 <label htmlFor="name">Nombre</label>
-                <input type="text" name="name" id="name" placeholder="Ingrese el nombre del nuevo empleado" value={nameValue} onChange={onInputChange} required/>
+                <input type="text" name="name" id="name" placeholder="Ingrese el nombre del nuevo empleado" value={nameValue} onChange={onInputChange} minLength={3} maxLength={32} required/>
 
                 <label htmlFor="lastName">Apellido</label>
-                <input type="text" name="lastName" id="lastName" placeholder="Ingrese el apellido del nuevo empleado" value={lastNameValue} onChange={onInputChange} required/>
+                <input type="text" name="lastName" id="lastName" placeholder="Ingrese el apellido del nuevo empleado" value={lastNameValue} onChange={onInputChange} minLength={3} maxLength={32} required/>
                 
                 <label htmlFor="rol">Rol</label>
                 <select name="rol" id="rol" value={rolValue} onChange={onInputChange} required>

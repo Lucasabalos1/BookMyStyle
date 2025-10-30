@@ -82,10 +82,10 @@ export const CreateClient = () => {
           <h2 >Complete los datos para el nuevo cliente</h2>
           <form onSubmit={onSubmitClient}>
             <label htmlFor="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del cliente" value={nameValue} onChange={onInputChange} required/>
+            <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del cliente" value={nameValue} minLength={3} maxLength={32} onChange={onInputChange} required/>
 
             <label htmlFor="apellido">Apellido</label>
-            <input type="text" name="apellido" id="apellido" placeholder="Ingrese el apellido del cliente" value={lastNameValue} onChange={onInputChange} required/>
+            <input type="text" name="apellido" id="apellido" placeholder="Ingrese el apellido del cliente" value={lastNameValue} minLength={3} maxLength={32} onChange={onInputChange} required/>
 
             <label htmlFor="telefono">Telefono</label>
             <input type="number" name="telefono" id="telefono" placeholder="Ingerese el telefono del cliente" value={phoneValue} onChange={onInputChange} required/>
