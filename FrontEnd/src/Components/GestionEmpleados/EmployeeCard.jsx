@@ -37,7 +37,7 @@ export const EmployeeCard = ({employee, getEmployee}) => {
       }
       
 
-      const response = await fetch(`http://127.0.0.1:5000/eliminarEmpleado/${employee.id}`,{
+      const response = await fetch(`https://bookmystyle.onrender.com/eliminarEmpleado/${employee.id}`,{
           method: "DELETE"
       })
       const data = await response.json()

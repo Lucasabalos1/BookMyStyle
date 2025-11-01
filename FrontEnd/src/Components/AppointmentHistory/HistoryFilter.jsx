@@ -61,8 +61,8 @@ const fetchList = async (url, setter, errorMsg) => {
   }
 
   useEffect(() => {
-    fetchList("http://127.0.0.1:5000/getClients", setClientList, "Hubo un error al traer los clientes")
-    fetchList("http://127.0.0.1:5000/getWorkers", setEmployeeList, "Hubo un error al traer los empleados")
+    fetchList("https://bookmystyle.onrender.com/getClients", setClientList, "Hubo un error al traer los clientes")
+    fetchList("https://bookmystyle.onrender.com/getWorkers", setEmployeeList, "Hubo un error al traer los empleados")
   }, [])
 
   return (

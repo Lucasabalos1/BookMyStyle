@@ -17,7 +17,7 @@ export const ServicesManager = () => {
 
   const getServices = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:5000/getServices')
+        const response = await fetch('https://bookmystyle.onrender.com/getServices')
         const data = await response.json()
         setServiceList(data.data)
     } catch (error) {

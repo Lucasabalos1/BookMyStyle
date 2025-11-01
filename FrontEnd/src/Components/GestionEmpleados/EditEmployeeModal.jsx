@@ -46,7 +46,7 @@ export const EditEmployeeModal = ({show, toggleEditModal,employee, getEmployee})
     event.preventDefault()
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/editarEmpleado/${employee.id}`, {
+      const response = await fetch(`https://bookmystyle.onrender.com/editarEmpleado/${employee.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

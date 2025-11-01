@@ -18,7 +18,7 @@ export const Login = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/login",
+        "https://bookmystyle.onrender.com/login",
         {
           method: "POST",
           headers: {

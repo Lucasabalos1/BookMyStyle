@@ -39,7 +39,7 @@ export const EditClientModal = ({show, toggleEditModal, client, getClients}) => 
     event.preventDefault()
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/editarCliente/${client.id}`,{
+      const response = await fetch(`https://bookmystyle.onrender.com/editarCliente/${client.id}`,{
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

@@ -11,7 +11,7 @@ export const MetricsService = () => {
 
   const getServiceMetrics = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/metricas/servicios')
+      const response = await fetch('https://bookmystyle.onrender.com/metricas/servicios')
       const data = await response.json()
       console.log(data.data)
       setServiceMetrics(data.data)

@@ -38,7 +38,7 @@ export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refr
     event.preventDefault();
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/editTurno/${appointmentId}`, {
+      const response = await fetch(`https://bookmystyle.onrender.com/editTurno/${appointmentId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -92,12 +92,12 @@ export const AppointmentEditModal = ({show, toggleEditModal, appointmentId, refr
     setEmployeeValue(user);
 
     try {
-      const responseClient = await fetch("http://127.0.0.1:5000/getClients");
+      const responseClient = await fetch("https://bookmystyle.onrender.com/getClients");
       const dataClient = await responseClient.json();
 
       setClientList(dataClient.data);
 
-      const responseService = await fetch("http://127.0.0.1:5000/getServices");
+      const responseService = await fetch("https://bookmystyle.onrender.com/getServices");
       const dataService = await responseService.json();
 
       setServiceList(dataService.data);

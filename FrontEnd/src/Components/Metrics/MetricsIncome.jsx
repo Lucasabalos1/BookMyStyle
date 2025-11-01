@@ -11,7 +11,7 @@ export const MetricsIncome = () => {
 
   const getIncomeMetrics = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/metricas/ingresos')
+      const response = await fetch('https://bookmystyle.onrender.com/metricas/ingresos')
       const data = await response.json()
       console.log(data.data)
       setIncomeMetrics(data.data)

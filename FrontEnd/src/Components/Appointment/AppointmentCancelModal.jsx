@@ -5,7 +5,7 @@ export const AppointmentCancelModal = ({show, toggleCancelModal, appointmentId, 
   
   const handleCancelAppointment = async() => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/cancelarTurno/${appointmentId}`,{
+      const response = await fetch(`https://bookmystyle.onrender.com/cancelarTurno/${appointmentId}`,{
         method: "PATCH"
       })
 

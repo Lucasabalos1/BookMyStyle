@@ -85,7 +85,7 @@ export const AppointmentCreate = () => {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/addTurno",{
+      const response = await fetch("https://bookmystyle.onrender.com/addTurno",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -136,12 +136,12 @@ export const AppointmentCreate = () => {
     setEmployeeValue(user)
 
     try {
-      const responseClient = await fetch("http://127.0.0.1:5000/getClients")
+      const responseClient = await fetch("https://bookmystyle.onrender.com/getClients")
       const dataClient = await responseClient.json()
 
       setClientList(dataClient.data)
 
-      const responseService = await fetch("http://127.0.0.1:5000/getServices")
+      const responseService = await fetch("https://bookmystyle.onrender.com/getServices")
       const dataService = await responseService.json()
 
       setServiceList(dataService.data)

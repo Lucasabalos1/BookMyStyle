@@ -11,7 +11,7 @@ export const ClientManager = () => {
   
   const getClients = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/getClients")
+      const response = await fetch("https://bookmystyle.onrender.com/getClients")
       const data = await response.json()
       if(data.success){
         setClients(data.data)

@@ -17,7 +17,7 @@ export const EmployeeManager = () => {
 
   const getEmployee = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/getWorkers")
+      const response = await fetch("https://bookmystyle.onrender.com/getWorkers")
       const data = await response.json()
       if(data.success){
         setEmployees(data.data)

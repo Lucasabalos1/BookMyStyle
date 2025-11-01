@@ -5,7 +5,7 @@ export const DeleteServiceModal = ({show, toggleDeleteModal, service,getServices
   
   const deleteService = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/deleteServices/${service.id}`,{
+      const response = await fetch(`https://bookmystyle.onrender.com/deleteServices/${service.id}`,{
           method: "DELETE"
       })
 

@@ -5,7 +5,7 @@ export const AppointmentConfirmModal = ({show, toggleConfirmModal, appointmentId
   
   const handleCompleteAppointment = async() => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/completarTurno/${appointmentId}`,{
+      const response = await fetch(`https://bookmystyle.onrender.com/completarTurno/${appointmentId}`,{
         method: "PATCH"
       })
 

@@ -11,7 +11,7 @@ export const MetricsEmployeer = () => {
 
   const getEmployeeMetrics = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/metricas/empleados')
+      const response = await fetch('https://bookmystyle.onrender.com/metricas/empleados')
       const data = await response.json()
       console.log(data.data)
       setEmployeeMetrics(data.data)

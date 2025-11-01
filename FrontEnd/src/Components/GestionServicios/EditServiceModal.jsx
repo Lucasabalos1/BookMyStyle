@@ -32,7 +32,7 @@ export const EditServiceModal = ({show, toggleEditModal, service, getServices}) 
       event.preventDefault()
   
       try {
-        const response = await fetch(`http://127.0.0.1:5000/editServices/${service.id}`, {
+        const response = await fetch(`https://bookmystyle.onrender.com/editServices/${service.id}`, {
           method : "PUT",
           headers:{
             "Content-Type": "application/json",

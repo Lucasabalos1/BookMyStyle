@@ -20,7 +20,7 @@ export const AppointmentManager = () => {
 
   const getAppointments = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/getTurnos")
+      const response = await fetch("https://bookmystyle.onrender.com/getTurnos")
       const data = await response.json()
 
       setAppointments(data.data)
@@ -38,17 +38,17 @@ export const AppointmentManager = () => {
   const getData = async () => {
     try {
 
-      const responseEmployee = await fetch("http://127.0.0.1:5000/getWorkers")
+      const responseEmployee = await fetch("https://bookmystyle.onrender.com/getWorkers")
       const dataEmployee = await responseEmployee.json()
 
       setEmployeeList(dataEmployee.data)
 
-      const responseClient = await fetch("http://127.0.0.1:5000/getClients")
+      const responseClient = await fetch("https://bookmystyle.onrender.com/getClients")
       const dataClient = await responseClient.json()
 
       setClientList(dataClient.data)
 
-      const responseService = await fetch("http://127.0.0.1:5000/getServices")
+      const responseService = await fetch("https://bookmystyle.onrender.com/getServices")
       const dataService = await responseService.json()
 
       setServiceList(dataService.data)

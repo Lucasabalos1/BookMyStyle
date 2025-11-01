@@ -19,7 +19,7 @@ export const ClientCard = ({client, getClients}) => {
 
   const deleteClient = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/eliminarCliente/${client.id}`,{
+      const response = await fetch(`https://bookmystyle.onrender.com/eliminarCliente/${client.id}`,{
         method: "DELETE"
       })
       const data = await response.json()
