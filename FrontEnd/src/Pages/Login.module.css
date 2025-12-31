@@ -7,12 +7,15 @@
 
 .loginContainer{
     padding: 20px;
-    background: #121212;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(15, 23, 42, 0.65); 
+    backdrop-filter: blur(12px);         
+    -webkit-backdrop-filter: blur(12px);    
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     width: 80%;
     margin: 0 auto;
-    box-shadow: 0 0 10px rgba(255, 78, 210, 0.5);  
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(255, 78, 210, 0.15);  
 }
 
 .logoContainer{
@@ -28,7 +31,7 @@
 }
 
 .loginContainer h4{
-    text-shadow: rgb(73, 0, 126) -1px 1px 0px, rgb(47, 0, 217) 1px -1px 0px;
+    text-shadow: none;
     text-align: center;
     margin-bottom: 30px;
     position: relative;
@@ -50,22 +53,28 @@ input{
 }
 
 .labelLogin{
-    font-weight: bold;
-    padding: 10px 0 5px;
+    color: #94a3b8; 
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase; 
+    letter-spacing: 0.05em;
+    padding: 15px 0 5px;
 }
 
 .inputLogin{
     width: 100%;
+    background-color: rgba(0, 0, 0, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 5px;
     border-radius: 5px;
-    border: 1px solid #ddd;
     font-size: 1rem;
 }
 
 .inputLogin:focus{
-    border: 1px solid #ff005c;
-    outline: none;
-    box-shadow: 0px 0px 5px 0px rgba(200,200,200,0.75);    
+    border: 1px solid #FF4ED2;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 8px rgba(255, 78, 210, 0.3); 
+    outline: none;   
 }
 
 .submitButton{
@@ -74,7 +83,7 @@ input{
     margin-top: 25px;
     font-size: 1rem;
     padding: 5px 20px;
-    border-radius: 5px;
+    border-radius: 7px;
     border: none;
     background: linear-gradient(90deg, #FF4ED2, #5A2A86);
     transition: 0.3s ease;

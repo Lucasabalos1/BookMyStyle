@@ -15,7 +15,7 @@ nav{
 
 .hamburgerContainer{
     padding: 8px 10px;
-    border: 1px solid #fff;
+    outline: 1px solid #fff;
     font-size: 1.5rem;
     border-radius: 10px;
     background-color: #121212;
@@ -31,7 +31,7 @@ nav{
 
 .userContainer,
 .homeContainer{
-    border: 1px solid #fdfdfd;
+    outline: 1px solid #fdfdfd;
     font-size: 1.5rem;
     background-color: #000;
     color: #fff;

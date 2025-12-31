@@ -6,14 +6,11 @@
     box-sizing: border-box;
 }
 
-body{
+body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0A0A2E 30%, #2C1A4A 70%, #332085  100%);
-  background-size: 600% 600%;
-  animation: gradientShift 15s ease infinite;
-  color: white; 
+  background: linear-gradient(135deg, #0f1117 0%, #1a1c2e 100%);
+  color: #e2e8f0;
   font-family: 'Inter', sans-serif;
-
 }
 
 @keyframes gradientShift{
@@ -38,7 +35,7 @@ body::-webkit-scrollbar-thumb {
     text-align: center;
     letter-spacing: 2px;
     margin: 30px 0 20px 0;
-    background: linear-gradient(90deg, #7C5CFA 0%, #FF4ED2 100%);
+    background: linear-gradient(90deg, #FFFFFF 0%, #FF4ED2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 

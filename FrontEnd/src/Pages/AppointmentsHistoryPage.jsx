@@ -21,7 +21,7 @@ export const AppointmentsHistoryPage = () => {
       if (employeeInputSelected) params.append("empleado", employeeInputSelected);
       if (DateInputSelected) params.append("fecha", DateInputSelected);
 
-      const response = await fetch(`http://localhost:5000/turnos/historial?${params.toString()}`)
+      const response = await fetch(`https://bookmystyle.onrender.com/turnos/historial?${params.toString()}`)
       const data = await response.json()
   
       if(data.success){

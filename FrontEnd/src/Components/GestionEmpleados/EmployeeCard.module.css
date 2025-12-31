@@ -1,12 +1,12 @@
 .employeeCard{
-    background-color: #212137;
-    border: 1px solid #E91E63;
-    box-shadow: 0px 0px 4px 0px #fff;
+    background-color: #24304A;
+    border: 1px solid rgba(219, 219, 219, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
+    margin: 20px 0;
     padding: 10px 5px;
 }
 
