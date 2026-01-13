@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from './Login.module.css'
 import logo from '../assets/BookmystyleLogoInverso.png';
@@ -65,6 +65,28 @@ export const Login = () => {
       console.log("Hubo un error al conectar con el servidor", error) 
     }
   }
+
+  useEffect(() => {
+    Swal.fire({
+    icon: 'info',
+    title: '¡Bienvenido/a a BookMyStyle!',
+    html: `
+      <div style="display:flex; flex-direction:column; aling-item:center;">
+        <p>Nuestro backend está alojado en <strong>Render (Plan Gratuito)</strong>.</p>
+        <p><strong>Nota importante:</strong> Al iniciar sesión, por favor espera aproximadamente <strong>1 minuto</strong> para que el servidor "despierte" y procese tu solicitud.</p>
+        <hr style="margin: 4px 0">
+        <p><strong>Credenciales de prueba:</strong></p>
+        <ul>
+          <li><strong>Correo:</strong> lucasabalos531@gmail.com</li>
+          <li><strong>Contraseña:</strong> admin123</li>
+        </ul>
+      </div>
+    `,
+    confirmButtonText: 'Entendido',
+    confirmButtonColor: '#FF4ED2',
+    allowOutsideClick: false
+  });
+  },[])
 
   return (
     <>
