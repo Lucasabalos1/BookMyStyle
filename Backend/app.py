@@ -38,7 +38,7 @@ class Cliente(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    phone_number = db.Column(db.String(20), nullable=True, unique=True)
+    phone_number = db.Column(db.String(20), nullable=False, unique=True)
     genre = db.Column(db.String(20), nullable=True)
     
 class Servicio(db.Model):
@@ -207,6 +207,15 @@ def get_clients():
         clients.append({"id": client.id, "nombre": client.name, "apellido": client.last_name, "telefono": client.phone_number, "genero": client.genre})
            
     return jsonify({"success": True, "data": clients}),200
+
+@app.route("/getCliente/<telefono>", methods=['GET'])
+def get_cliente(telefono):
+    cliente = Cliente.query.filter_by(phone_number=telefono).first()
+    
+    if not cliente:
+        return jsonify({"success": False, "message": "No se encontro ningun cliente con ese numero"}), 404
+    
+    return jsonify({"id": cliente.id, "nombre": cliente.name, "apellido": cliente.last_name, "telefono": cliente.phone_number, "genero": cliente.genre}), 200
 
 @app.route("/addClient", methods=['POST'])
 def add_client():
