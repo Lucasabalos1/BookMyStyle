@@ -303,6 +303,50 @@ def getTurnos():
     
     return jsonify({"success": True, "data": Appointments}),200
 
+@app.route("/getNextTurno/<int:cliente_id>", methods=['GET'])
+def getNextTurno(cliente_id):
+    cliente = Cliente.query.get(cliente_id)
+    
+    if not cliente:
+        return jsonify({"success": False, "message": "El cliente no existe"}), 404
+    
+    ahora = datetime.datetime.now()
+    
+    turnos_futuros = Turno.query.filter(
+        Turno.cliente_id == cliente_id,
+        Turno.date >= ahora.date()
+    ).all()
+    
+    if not turnos_futuros:
+        return jsonify({"success": False, "message": "El cliente no tiene turnos futuros"}), 404
+    
+    turno_mas_cercano = None
+    diferencia_minima = None
+    
+    for turno in turnos_futuros:
+        fecha_hora_turno = datetime.datetime.combine(turno.date, turno.hour)
+        
+        if fecha_hora_turno >= ahora:
+            diferencia = (fecha_hora_turno - ahora).total_seconds()
+            
+            if diferencia_minima is None or diferencia < diferencia_minima:
+                diferencia_minima = diferencia
+                turno_mas_cercano = turno
+    
+    if not turno_mas_cercano:
+        return jsonify({"success": False, "message": "El cliente no tiene turnos futuros"}), 404
+    
+    return jsonify({"success": True, "data": {
+        "id": turno_mas_cercano.id,
+        "fecha": turno_mas_cercano.date.strftime("%Y-%m-%d"),
+        "hora": turno_mas_cercano.hour.strftime("%H:%M"),
+        "estado": turno_mas_cercano.state.value,
+        "note": turno_mas_cercano.note,
+        "empleado": turno_mas_cercano.empleado_id,
+        "cliente": turno_mas_cercano.cliente_id,
+        "servicio": turno_mas_cercano.servicio_id
+    }}), 200
+
 @app.route("/addTurno", methods=['POST'])
 def add_turno():
     data = request.get_json()
