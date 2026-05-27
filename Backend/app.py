@@ -357,6 +357,12 @@ def add_turno():
     empleado_id = data.get("empleado")
     cliente_id = data.get("cliente")
     servicio_id = data.get("servicio")
+    try:
+        empleado_id = int(data.get("empleado")) if data.get("empleado") else None
+        cliente_id = int(data.get("cliente")) if data.get("cliente") else None
+        servicio_id = int(data.get("servicio")) if data.get("servicio") else None
+    except (ValueError, TypeError):
+        return jsonify({"success": False, "message": "Los IDs de cliente, empleado o servicio deben ser numéricos"}), 400
     
     if not dateStr or not hourStr or not state or not empleado_id or not cliente_id or not servicio_id:
         return jsonify({"success": False, "message": "Los campos no quedan quedar vacios"}),400
