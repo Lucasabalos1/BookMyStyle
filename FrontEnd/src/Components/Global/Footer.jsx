@@ -8,7 +8,7 @@ export const Footer = () => {
         <div className={styles.footerSection}>
           <h2 className={styles.brandName}>BookMyStyle</h2>
           <p className={styles.description}>
-            Plataforma profesional para gestionar turnos, clientes y servicios de tu peluqueria.
+            Plataforma profesional para gestionar turnos, clientes y servicios de tu peluqueria .
           </p>
         </div>
 
