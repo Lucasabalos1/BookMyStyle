@@ -1,16 +1,170 @@
-.footerContainer{
-    background-color: #000;
-    padding: 10px;
+.footer {
+    background: linear-gradient(180deg, rgba(15, 17, 23, 0.9) 0%, rgba(25, 31, 77, 0.95) 100%);
+    border-top: 2px solid #FF4ED2;
+    color: #e2e8f0;
+    margin-top: auto;
+}
+
+.footerContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px 20px 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footerSection {
     display: flex;
-    justify-content: space-between;
-    outline: 1px solid #fff ;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.footerContainer a{
-    text-decoration: none;
+.brandName {
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, #FFFFFF 0%, #FF4ED2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }
 
-.footerContainer h3{
+.description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #a0aec0;
+}
+
+.sectionTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
     color: #fff;
-    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.sectionTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #FF4ED2 0%, transparent 100%);
+}
+
+.linkList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.linkList li a {
+    color: #cbd5e0;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.linkList li a:hover {
+    color: #FF4ED2;
+    transform: translateX(5px);
+}
+
+.linkList li a::before {
+    content: '→';
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.linkList li a:hover::before {
+    opacity: 1;
+}
+
+.socialLinks {
+    display: flex;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.socialIcon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 78, 210, 0.1);
+    border: 1px solid #FF4ED2;
+    border-radius: 50%;
+    color: #FF4ED2;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.socialIcon:hover {
+    background-color: #FF4ED2;
+    color: #0f1117;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 78, 210, 0.3);
+}
+
+.developerText {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #a0aec0;
+}
+
+.portfolioLink {
+    display: inline-block;
+    padding: 10px 16px;
+    background: linear-gradient(90deg, #FF4ED2 0%, #7c5cfa 100%);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.portfolioLink:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 78, 210, 0.4);
+}
+
+.footerBottom {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 78, 210, 0.2);
+    padding: 20px;
+    text-align: center;
+    color: #71829e;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .footerContainer {
+        grid-template-columns: 1fr;
+        padding: 40px 20px 25px;
+        gap: 30px;
+    }
+
+    .brandName {
+        font-size: 1.5rem;
+    }
+
+    .sectionTitle {
+        font-size: 1rem;
+    }
 }
